@@ -1,5 +1,4 @@
 """Model for telegram analitics app."""
-from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -15,10 +14,8 @@ class Message(db.Model):
     chat = db.Column(db.String)
     date = db.Column(db.DateTime)
 
-    
     def __repr__(self):
         return f"<Message message_id={self.message_id} text={self.text} date={self.date}>"
-
 
 
 class User(db.Model):
@@ -30,7 +27,6 @@ class User(db.Model):
     def __repr__(self):
         return f"<User user_id={self.user_id}>"
     
-
 
 def connect_to_db(flask_app, db_uri="postgresql:///project", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
