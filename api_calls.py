@@ -1,18 +1,19 @@
 #To Access OS environmental variables
 import os
+from typing import Dict
+
 from flask import Flask
 # Library for API calls
 import requests
+import json
 from model import Message, User, connect_to_db, db
 
 bot_key = os.environ['API_BOT_KEY']
 
 
-def get_updates():
-    print(bot_key)
-    
+def get_updates() -> Dict:
     response = requests.get('https://api.telegram.org/bot' + bot_key + '/getUpdates')
-
+    print(response.text)
     return response.json()
 
 
@@ -28,12 +29,14 @@ def example_data():
 
 def get_text():
     text = get_updates()
-    mm = []
-    for u in text['result']:
-        m = Message(u['message']['text'])
-        mm.append(m)
-    db.session.add(mm)
+    mes = []
+    for i in text["result"]:
+        m = Message(content=i["message"]['text'], date=i['date'])
+        mes.append(m)
+    db.session.add_all(mes)
     db.session.commit()
+
+
 
 # import schedule
 # if __name__ == '__main__':
@@ -45,4 +48,5 @@ def get_text():
 
 app = Flask(__name__)
 connect_to_db(app)
+get_updates()
 
