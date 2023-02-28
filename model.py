@@ -1,5 +1,6 @@
 """Model for telegram analitics app."""
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -11,12 +12,12 @@ class Message(db.Model):
 
     message_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
-    text = db.Column(db. String)
-    chat = db.Column(db.String)
-    date = db.Column(db.DateTime)
+    content = db.Column(db.String, nullable=False, default="Unknown")
+    chat = db.Column(db.String, nullable=False, default="Unknown")
+    date = db.Column(db.DateTime, nullable=False, default="Unknown")
 
     def __repr__(self):
-        return f"<Message message_id={self.message_id} text={self.text} date={self.date}>"
+        return f"<Message message_id={self.message_id} content={self.content} date={self.date}>"
 
 
 class User(db.Model):
@@ -24,6 +25,7 @@ class User(db.Model):
 
     __tablename__ = "users"
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_name = db.Column(db.String)
 
     def __repr__(self):
         return f"<User user_id={self.user_id}>"
