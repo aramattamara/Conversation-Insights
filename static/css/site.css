@@ -1,0 +1,10 @@
+div.user {
+    text-align: center;
+    border-radius: 20px;
+    border: 3px solid black;
+    width: 11em;
+    height: auto;
+    margin: 2em;
+    padding: 1em;
+    display: inline-block;
+}

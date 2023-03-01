@@ -1,13 +1,15 @@
-from flask import Flask, session, render_template, request, flash, redirect
+from typing import Dict, List
+
+from flask import Flask, jsonify, session, render_template, request, flash, redirect
 
 import crud
-from model import Message, connect_to_db
-import os
-import requests
-import json
+from model import Message, connect_to_db, User
+from jinja2 import StrictUndefined
+
 
 app = Flask(__name__)
-app.secret_key = "SECRETSECRETSECRET"
+app.secret_key = "dev"
+app.jinja_env.undefined = StrictUndefined
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
@@ -24,8 +26,22 @@ def analytics():
     return render_template("analytics.html")
 
 
+@app.route("/users.json")
+def get_users_json():
+
+    users: List[User] = crud.get_users()
+    print(users)
+
+    dd = []
+    for u in users:
+        d = u.to_dict()
+        dd.append(d)
+
+    return jsonify(dd)
+
+
 @app.route("/users")
-def users():
+def get_users():
     """View all users."""
 
     users = crud.get_users()

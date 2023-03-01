@@ -1,11 +1,10 @@
 """Model for telegram analitics app."""
+from typing import Dict
+
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Table, Column, Integer, String
-from sqlalchemy.types import TypeDecorator
-from datetime import datetime
+from sqlalchemy_serializer import SerializerMixin
 
 db = SQLAlchemy()
-
 
 class Message(db.Model):
     """A message."""
@@ -23,7 +22,7 @@ class Message(db.Model):
         return f"<Message message_id={self.message_id} content={self.content} date={self.date}>"
 
 
-class User(db.Model):
+class User(db.Model, SerializerMixin):
     """A user."""
 
     __tablename__ = "users"
@@ -41,12 +40,10 @@ class User(db.Model):
 #
 #     __tablename__ = "chats"
 #     chat_id = db.Column(db.BigInteger, nullable=False, primary_key=True,)
-#     # title = db.Column(db.String)
-
-
-    def __repr__(self):
-        return f"<Chat chat_id{self.chat_id}>"
-
+#    # title = db.Column(db.String)
+#
+#     def __repr__(self):
+#         return f"<Chat chat_id{self.chat_id}>"
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///project", echo=True):

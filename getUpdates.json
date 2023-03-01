@@ -1,0 +1,247 @@
+{
+  "ok": true,
+  "result": [
+    {
+      "update_id": 131327766,
+      "message": {
+        "message_id": 1,
+        "from": {
+          "id": 388268832,
+          "is_bot": false,
+          "first_name": "Tamara",
+          "last_name": "Vashchuk",
+          "username": "vashchuktamara",
+          "language_code": "en"
+        },
+        "chat": {
+          "id": 388268832,
+          "first_name": "Tamara",
+          "last_name": "Vashchuk",
+          "username": "vashchuktamara",
+          "type": "private"
+        },
+        "date": 1677537060,
+        "text": "/start",
+        "entities": [
+          {
+            "offset": 0,
+            "length": 6,
+            "type": "bot_command"
+          }
+        ]
+      }
+    },
+    {
+      "update_id": 131327767,
+      "my_chat_member": {
+        "chat": {
+          "id": -1001665229981,
+          "title": "Bloubergstrand \ud83e\ude81",
+          "type": "supergroup"
+        },
+        "from": {
+          "id": 388268832,
+          "is_bot": false,
+          "first_name": "Tamara",
+          "last_name": "Vashchuk",
+          "username": "vashchuktamara",
+          "language_code": "en"
+        },
+        "date": 1677537095,
+        "old_chat_member": {
+          "user": {
+            "id": 6216906973,
+            "is_bot": true,
+            "first_name": "analitics",
+            "username": "analitics123_bot"
+          },
+          "status": "left"
+        },
+        "new_chat_member": {
+          "user": {
+            "id": 6216906973,
+            "is_bot": true,
+            "first_name": "analitics",
+            "username": "analitics123_bot"
+          },
+          "status": "member"
+        }
+      }
+    },
+    {
+      "update_id": 131327768,
+      "message": {
+        "message_id": 51,
+        "from": {
+          "id": 388268832,
+          "is_bot": false,
+          "first_name": "Tamara",
+          "last_name": "Vashchuk",
+          "username": "vashchuktamara",
+          "language_code": "en"
+        },
+        "chat": {
+          "id": -1001665229981,
+          "title": "Bloubergstrand \ud83e\ude81",
+          "type": "supergroup"
+        },
+        "date": 1677537095,
+        "new_chat_participant": {
+          "id": 6216906973,
+          "is_bot": true,
+          "first_name": "analitics",
+          "username": "analitics123_bot"
+        },
+        "new_chat_member": {
+          "id": 6216906973,
+          "is_bot": true,
+          "first_name": "analitics",
+          "username": "analitics123_bot"
+        },
+        "new_chat_members": [
+          {
+            "id": 6216906973,
+            "is_bot": true,
+            "first_name": "analitics",
+            "username": "analitics123_bot"
+          }
+        ]
+      }
+    },
+    {
+      "update_id": 131327769,
+      "my_chat_member": {
+        "chat": {
+          "id": -1001665229981,
+          "title": "Bloubergstrand \ud83e\ude81",
+          "type": "supergroup"
+        },
+        "from": {
+          "id": 388268832,
+          "is_bot": false,
+          "first_name": "Tamara",
+          "last_name": "Vashchuk",
+          "username": "vashchuktamara",
+          "language_code": "en"
+        },
+        "date": 1677618038,
+        "old_chat_member": {
+          "user": {
+            "id": 6216906973,
+            "is_bot": true,
+            "first_name": "analitics",
+            "username": "analitics123_bot"
+          },
+          "status": "member"
+        },
+        "new_chat_member": {
+          "user": {
+            "id": 6216906973,
+            "is_bot": true,
+            "first_name": "analitics",
+            "username": "analitics123_bot"
+          },
+          "status": "left"
+        }
+      }
+    },
+    {
+      "update_id": 131327770,
+      "my_chat_member": {
+        "chat": {
+          "id": -1001665229981,
+          "title": "Bloubergstrand \ud83e\ude81",
+          "type": "supergroup"
+        },
+        "from": {
+          "id": 388268832,
+          "is_bot": false,
+          "first_name": "Tamara",
+          "last_name": "Vashchuk",
+          "username": "vashchuktamara",
+          "language_code": "en"
+        },
+        "date": 1677618054,
+        "old_chat_member": {
+          "user": {
+            "id": 6216906973,
+            "is_bot": true,
+            "first_name": "analitics",
+            "username": "analitics123_bot"
+          },
+          "status": "left"
+        },
+        "new_chat_member": {
+          "user": {
+            "id": 6216906973,
+            "is_bot": true,
+            "first_name": "analitics",
+            "username": "analitics123_bot"
+          },
+          "status": "member"
+        }
+      }
+    },
+    {
+      "update_id": 131327771,
+      "message": {
+        "message_id": 59,
+        "from": {
+          "id": 388268832,
+          "is_bot": false,
+          "first_name": "Tamara",
+          "last_name": "Vashchuk",
+          "username": "vashchuktamara",
+          "language_code": "en"
+        },
+        "chat": {
+          "id": -1001665229981,
+          "title": "Bloubergstrand \ud83e\ude81",
+          "type": "supergroup"
+        },
+        "date": 1677618054,
+        "new_chat_participant": {
+          "id": 6216906973,
+          "is_bot": true,
+          "first_name": "analitics",
+          "username": "analitics123_bot"
+        },
+        "new_chat_member": {
+          "id": 6216906973,
+          "is_bot": true,
+          "first_name": "analitics",
+          "username": "analitics123_bot"
+        },
+        "new_chat_members": [
+          {
+            "id": 6216906973,
+            "is_bot": true,
+            "first_name": "analitics",
+            "username": "analitics123_bot"
+          }
+        ]
+      }
+    },
+    {
+      "update_id": 131327772,
+      "message": {
+        "message_id": 60,
+        "from": {
+          "id": 388268832,
+          "is_bot": false,
+          "first_name": "Tamara",
+          "last_name": "Vashchuk",
+          "username": "vashchuktamara",
+          "language_code": "en"
+        },
+        "chat": {
+          "id": -1001665229981,
+          "title": "Bloubergstrand \ud83e\ude81",
+          "type": "supergroup"
+        },
+        "date": 1677618058,
+        "text": "WWWWWWWWWWWWWWWWW"
+      }
+    }
+  ]
+}
