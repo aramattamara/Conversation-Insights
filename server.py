@@ -1,4 +1,6 @@
 from flask import Flask, session, render_template, request, flash, redirect
+
+import crud
 from model import Message, connect_to_db
 import os
 import requests
@@ -14,6 +16,21 @@ def homepage():
     """Show homepage."""
 
     return render_template("homepage.html")
+
+
+@app.route("/analytics")
+def analytics():
+
+    return render_template("analytics.html")
+
+
+@app.route("/users")
+def users():
+    """View all users."""
+
+    users = crud.get_users()
+
+    return render_template("users.html", users=users)
 
 
 if __name__ == "__main__":
