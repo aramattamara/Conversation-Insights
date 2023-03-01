@@ -27,16 +27,44 @@ def example_data():
     db.session.commit()
 
 
-def get_text():
-    text = get_updates()
+def save_data(data: Dict):
+
     mes = []
-    for i in text["result"]:
-        m = Message(content=i["message"]['text'], date=i['date'])
+    usr = []
+    chat = []
+    for i in data["result"]:
+        print(i)
+        if "message" not in i:
+            continue
+        if "text" not in i["message"]:
+            continue
+
+        u = User(user_id=i["message"]["from"]["id"],
+                 first_name=i["message"]["from"]["first_name"],
+                 last_name=i["message"]["from"]["last_name"],
+                 username=i["message"]["from"]["username"])
+        usr.append(u)
+
+        # c = Chat(chat_id=i["message"]["chat"]["id"])
+        # chat.append(c)
+
+        m = Message(update_id=i["update_id"],
+                    message_id=i["message"]["message_id"],
+                    date=i["message"]["date"],
+                    content=i["message"]["text"]
+                    )
         mes.append(m)
+
+    # Users and chats must be saved first, as Message has foreight keys to them
+    db.session.add_all(usr)
+    db.session.add_all(chat)
     db.session.add_all(mes)
     db.session.commit()
 
 
+def pull_new_updates():
+    data = get_updates()
+    save_data(data)
 
 # import schedule
 # if __name__ == '__main__':
@@ -46,7 +74,8 @@ def get_text():
     #     get_text()
     #     sleep(30)
 
+
 app = Flask(__name__)
 connect_to_db(app)
-get_updates()
+pull_new_updates()
 
