@@ -50,15 +50,22 @@ def save_data(data: Dict):
 
         m = Message(update_id=i["update_id"],
                     message_id=i["message"]["message_id"],
+                    user_id=i["message"]["from"]["id"],
                     date=i["message"]["date"],
                     content=i["message"]["text"]
                     )
         mes.append(m)
 
     # Users and chats must be saved first, as Message has foreight keys to them
-    db.session.add_all(usr)
-    db.session.add_all(chat)
-    db.session.add_all(mes)
+    for u in usr:
+        db.session.merge(u)
+
+    for c in chat:
+        db.session.merge(c)
+
+    for m in mes:
+        db.session.merge(m)
+
     db.session.commit()
 
 
