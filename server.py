@@ -34,8 +34,7 @@ def homepage():
 
 
 @app.route("/dashboard")
-def analytics():
-
+def dashboard():
     return render_template("dashboard.html")
 
 
@@ -60,7 +59,7 @@ def get_users():
 
     users = crud.get_members()
 
-    return render_template("users.html", users=users)
+    return render_template("dashboard.html", users=users)
 
 
 @app.route('/upload')
@@ -75,10 +74,6 @@ def handle_upload():
 
 
 # ################### DASHBOARD (MEMBER SEARCH) ################### #
-
-@app.route("/dashboard")
-def display_searchbox():
-    render_template("dashboard.html")
 
 
 @app.route('/search.json', methods=["GET"])

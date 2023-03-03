@@ -1,33 +1,32 @@
-import React from "react";
-
 function MemberCard(props) {
     return (
         <div className="member">
             <p>{props.fname} {props.lname}</p>
-            <p>Username: @{props.username}</p>
+            <p>Username: @{props.member_name}</p>
             <p>Total Messages: {props.total}</p>
         </div>
     );
 }
 
 function MemberCollection() {
+
     const [members, setMembers] = React.useState([]);
 
     React.useEffect(() => {
         fetch("/members.json")
             .then((response) => response.json())
-            .then((data) => setUsers(data));
+            .then((data) => setMembers(data));
     }, []);
 
     const MemberCards = [];
     for (const member of members) {
         MemberCards.push(
             <MemberCard
-                key={user.user_id}
-                fname={user.first_name}
-                lname={user.last_name}
-                username={user.username}
-                total={user.total}
+                key={member.member_id}
+                fname={member.first_name}
+                lname={member.last_name}
+                member_name={member.member_name}
+                total={member.total}
             />,
         );
     }
@@ -46,7 +45,6 @@ function MemberCollection() {
 
     return (
         <React.Fragment>
-            <!-- MEMBER SEARCH FORM -->
             <div className="search-box">
                 <form onSubmit={onMySubmit} id="search-result" className="text-center">
                     <h5><label htmlFor="search-text">Search Memeber:</label></h5>
@@ -58,9 +56,8 @@ function MemberCollection() {
                 <div className="card">
                     {MemberCards}
                 </div>
-
         </React.Fragment>
 );
 }
 
-ReactDOM.render(<UserCollection/>, document.getElementById('members'));
+ReactDOM.render(<MemberCollection/>, document.getElementById('members'));
