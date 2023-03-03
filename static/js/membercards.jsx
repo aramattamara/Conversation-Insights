@@ -34,30 +34,34 @@ function MemberCollection() {
     function onMySubmit(evt) {
         evt.preventDefault()
 
-        React.useEffect(() => {
-            fetch('/search.json')
-                .then((response) => response.json())
-                .then((data) => {
-                    setMembers(data)
-                })
-        }, []);
+        fetch('/search.json?search-text=' + encodeURIComponent(searchText))
+            .then((response) => response.json())
+            .then((data) => {
+                setMembers(data)
+            });
     }
+    const [searchText, setSearchText] = React.useState('');
 
     return (
         <React.Fragment>
             <div className="search-box">
-                <form onSubmit={onMySubmit} id="search-result" className="text-center">
+                <form onChange={onMySubmit} id="search-result" className="text-center">
                     <h5><label htmlFor="search-text">Search Memeber:</label></h5>
-                    <input type="text" name="search-text" id="search-text" className="form-control"
-                           placeholder="Search all"/>
+                    <input type="text"
+                           id="search-text"
+                           className="form-control"
+                           placeholder="Search all"
+                           value={searchText}
+                           onChange={(e) => setSearchText(e.target.value)}
+                    />
                 </form>
             </div>
             <br/>
-                <div className="card">
-                    {MemberCards}
-                </div>
+            <div className="card">
+                {MemberCards}
+            </div>
         </React.Fragment>
-);
+    );
 }
 
 ReactDOM.render(<MemberCollection/>, document.getElementById('members'));

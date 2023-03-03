@@ -81,9 +81,14 @@ def process_member_search():
 
     member_search = request.args.get("search-text")
 
-    results_json = crud.search_members(member_search)
+    members = crud.search_members(member_search)
 
-    return jsonify(results_json)
+    result_json = []
+    for member in members:
+        result_json.append(member.to_dict())
+
+    return jsonify(result_json)
+
 
 
 if __name__ == "__main__":
