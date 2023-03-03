@@ -1,17 +1,24 @@
 """CRUD operations. """
-from model import db, Message, User, connect_to_db
+from typing import List
+
+from model import db, Message, Member, connect_to_db
 
 
-def create_message():
-    message = Message(
-    )
-    return
-
-
-def get_users():
+def get_members():
     """Return all users."""
+    return Member.query.all()
 
-    return User.query.all()
+
+def search_members(search_value) -> List[Member]:
+    """Checks if member exists in DB. If so returns instantiated Member (User) object.
+    Returns none if member not found"""
+    return Member.query.filter((Member.first_name.like(f'%{search_value}%')) |
+                               (Member.last_name.like(f'%{search_value}%')) |
+                               (Member.member_name.like(f'%{search_value}%'))).all()
+
+
+def get_mes_count_by_member(member_id):
+    return Message.query.filter_by(member_id=member_id).count()
 
 
 if __name__ == "__main__":
