@@ -1,12 +1,12 @@
-#To Access OS environmental variables
+# To Access OS environmental variables
 import os
 from typing import Dict
 
 from flask import Flask
 # Library for API calls
 import requests
-import json
-from model import Message, User, connect_to_db, db
+
+from model import Message, Member, connect_to_db, db
 
 bot_key = os.environ['API_BOT_KEY']
 
@@ -28,9 +28,8 @@ def example_data():
 
 
 def save_data(data: Dict):
-
-    mes = []
-    usr = []
+    messages = []
+    members = []
     chat = []
     for i in data["result"]:
         print(i)
@@ -39,32 +38,34 @@ def save_data(data: Dict):
         if "text" not in i["message"]:
             continue
 
-        u = User(user_id=i["message"]["from"]["id"],
-                 first_name=i["message"]["from"]["first_name"],
-                 last_name=i["message"]["from"]["last_name"],
-                 username=i["message"]["from"]["username"])
-        usr.append(u)
+        member = Member(member_id=i["message"]["from"]["id"],
+                        member_name=i["message"]["from"]["username"],
+                        first_name=i["message"]["from"]["first_name"],
+                        last_name=i["message"]["from"]["last_name"],
+
+                        )
+        members.append(member)
 
         # c = Chat(chat_id=i["message"]["chat"]["id"])
         # chat.append(c)
 
-        m = Message(update_id=i["update_id"],
-                    message_id=i["message"]["message_id"],
-                    user_id=i["message"]["from"]["id"],
-                    date=i["message"]["date"],
-                    content=i["message"]["text"]
-                    )
-        mes.append(m)
+        message = Message(update_id=i["update_id"],
+                          message_id=i["message"]["message_id"],
+                          member_id=i["message"]["from"]["id"],
+                          date=i["message"]["date"],
+                          content=i["message"]["text"]
+                          )
+        messages.append(message)
 
     # Users and chats must be saved first, as Message has foreight keys to them
-    for u in usr:
-        db.session.merge(u)
+    for member in members:
+        db.session.merge(member)
 
     for c in chat:
         db.session.merge(c)
 
-    for m in mes:
-        db.session.merge(m)
+    for message in messages:
+        db.session.merge(message)
 
     db.session.commit()
 
@@ -73,16 +74,16 @@ def pull_new_updates():
     data = get_updates()
     save_data(data)
 
+
 # import schedule
 # if __name__ == '__main__':
-    # # schedule.every(30).seconds.do(get_text)
-    # while True:
-    #     # schedule.run_pending()
-    #     get_text()
-    #     sleep(30)
+# # schedule.every(30).seconds.do(get_text)
+# while True:
+#     # schedule.run_pending()
+#     get_text()
+#     sleep(30)
 
 
 app = Flask(__name__)
 connect_to_db(app)
 pull_new_updates()
-

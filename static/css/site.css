@@ -1,4 +1,4 @@
-div.user {
+div.member {
     text-align: center;
     border-radius: 20px;
     border: 3px solid black;
@@ -7,4 +7,10 @@ div.user {
     margin: 2em;
     padding: 1em;
     display: inline-block;
+}
+
+
+span.dashboard.glyphicon-search {
+    font-size: 2em;
+    color: #D5D5D5;
 }
