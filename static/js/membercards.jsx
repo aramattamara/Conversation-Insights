@@ -1,6 +1,27 @@
 function MemberCard(props) {
+
+    const [isSelected, setIsSelected] = React.useState(false);
+
+    const handleClick = () => {
+        setIsSelected(!isSelected);
+    };
+
+    const cardStyle = {
+        backgroundColor: isSelected ? '#ADD8E6' : '#D3D3D3',
+        color: isSelected ? 'white' : 'black',
+        border: '2px solid black',
+        padding: '1em',
+        margin: '2em',
+        height: 'auto',
+        width: '11em',
+        borderRadius: '20px',
+        cursor: 'pointer',
+        display: 'inline-block',
+        textAlign: 'center',
+    };
+
     return (
-        <div className="member">
+        <div  style={cardStyle} onClick={handleClick} >
                 <p>{props.fname} {props.lname}</p>
                 <p>Username: @{props.member_name}</p>
                 <p>Total Messages: {props.total}</p>
