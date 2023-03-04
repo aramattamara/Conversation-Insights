@@ -2,3 +2,22 @@ span.dashboard.glyphicon-search {
     font-size: 2em;
     color: #D5D5D5;
 }
+
+.member-card {
+    background-color: white;
+    color:  black;
+    border: 2px solid black;
+    padding: 1em;
+    margin: 2em;
+    height: auto;
+    width: 11em;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+}
+
+.selected {
+    background-color: #ADD8E6;
+    color: white;
+}

@@ -17,10 +17,6 @@ def search_members(search_value) -> List[Member]:
                                (Member.member_name.like(f'%{search_value}%'))).all()
 
 
-def get_mes_count_by_member(member_id):
-    return Message.query.filter_by(member_id=member_id).count()
-
-
 if __name__ == "__main__":
     from server import app
 

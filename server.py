@@ -45,11 +45,8 @@ def get_members_json():
 
     dd = []
     for member in members:
-        d = member.to_dict()
-        total = crud.get_mes_count_by_member(member.member_id)
-        d['total'] = total
+        d = member.to_dict_with_count()
         dd.append(d)
-
     return jsonify(dd)
 
 
@@ -85,10 +82,9 @@ def process_member_search():
 
     result_json = []
     for member in members:
-        result_json.append(member.to_dict())
+        result_json.append(member.to_dict_with_count())
 
     return jsonify(result_json)
-
 
 
 if __name__ == "__main__":
