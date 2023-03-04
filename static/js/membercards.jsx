@@ -1,25 +1,22 @@
 function MemberCard(props) {
     return (
         <div className="member">
-            <p>{props.fname} {props.lname}</p>
-            <p>Username: @{props.member_name}</p>
-            <p>Total Messages: {props.total}</p>
+                <p>{props.fname} {props.lname}</p>
+                <p>Username: @{props.member_name}</p>
+                <p>Total Messages: {props.total}</p>
         </div>
     );
 }
 
-function MemberCollection() {
-
-    const [members, setMembers] = React.useState([]);
-
-    React.useEffect(() => {
-        fetch("/members.json")
-            .then((response) => response.json())
-            .then((data) => setMembers(data));
-    }, []);
+function MemberList(props) {
+    // React.useEffect(() => {
+    //     fetch("/members.json")
+    //         .then((response) => response.json())
+    //         .then((data) => setMembers(data));
+    // }, []);
 
     const MemberCards = [];
-    for (const member of members) {
+    for (const member of props.members) {
         MemberCards.push(
             <MemberCard
                 key={member.member_id}
@@ -31,21 +28,28 @@ function MemberCollection() {
         );
     }
 
-    function onMySubmit(evt) {
-        evt.preventDefault()
+    return <div>{MemberCards}</div>
+}
 
+function MemberCollection(props) {
+
+    const [members, setMembers] = React.useState([]);
+
+    const [searchText, setSearchText] = React.useState('');
+
+    React.useEffect(() => {
         fetch('/search.json?search-text=' + encodeURIComponent(searchText))
             .then((response) => response.json())
             .then((data) => {
                 setMembers(data)
             });
-    }
-    const [searchText, setSearchText] = React.useState('');
+    }, [searchText]);
 
     return (
         <React.Fragment>
             <div className="search-box">
-                <form onChange={onMySubmit} id="search-result" className="text-center">
+
+                <form id="search-result" className="text-center">
                     <h5><label htmlFor="search-text">Search Memeber:</label></h5>
                     <input type="text"
                            id="search-text"
@@ -58,7 +62,7 @@ function MemberCollection() {
             </div>
             <br/>
             <div className="card">
-                {MemberCards}
+                <MemberList members={members}/>
             </div>
         </React.Fragment>
     );
