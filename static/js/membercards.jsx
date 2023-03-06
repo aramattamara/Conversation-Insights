@@ -1,13 +1,14 @@
 function MemberCard(props) {
 
-    const [isSelected, setIsSelected] = React.useState(false);
+    // const [isSelected, setIsSelected] = React.useState(false);
 
-    const handleClick = () => {
-        setIsSelected(!isSelected);
-    };
+    // const handleClick = () => {
+    //     setIsSelected(!isSelected);
+    // };
 
     return (
-        <div className={`member-card ${isSelected ? 'selected' : ''}`} onClick={handleClick}>
+        <div className={`member-card ${props.selected ? 'selected' : ''}`}
+             onClick={props.toggleSelected}>
             <p>{props.fname} {props.lname}</p>
             <p>Username: @{props.member_name}</p>
             <p>Total Messages: {props.total}</p>
@@ -16,17 +17,27 @@ function MemberCard(props) {
 }
 
 function MemberList(props) {
-    // React.useEffect(() => {
-    //     fetch("/members.json")
-    //         .then((response) => response.json())
-    //         .then((data) => setMembers(data));
-    // }, []);
+    const [selectedMemberIds, setSelectedMemberIds] = React.useState({});
+
+    // let selectedMemberIds = [23, 34];
+    // let selected = selectedMemberIds.indexOf(member.member_id) != -1
+
+    // let selectedMemberIds = {23: true, 34: false};
+    // let selected = selectedMemberIds[member.member_id];
+
+    function toggleSetSelected(memberId) {
+        let newSelectedMemberIds = {...selectedMemberIds};
+        newSelectedMemberIds[memberId] = !newSelectedMemberIds[memberId];
+        setSelectedMemberIds(newSelectedMemberIds);
+    }
 
     const MemberCards = [];
     for (const member of props.members) {
         MemberCards.push(
             <MemberCard
                 key={member.member_id}
+                selected={selectedMemberIds[member.member_id]}
+                toggleSelected={() => toggleSetSelected(member.member_id)}
                 fname={member.first_name}
                 lname={member.last_name}
                 member_name={member.member_name}
