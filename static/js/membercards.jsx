@@ -7,10 +7,10 @@ function MemberCard(props) {
     };
 
     return (
-        <div className={`member-card ${isSelected ? 'selected' : ''}`} onClick={handleClick} >
-                <p>{props.fname} {props.lname}</p>
-                <p>Username: @{props.member_name}</p>
-                <p>Total Messages: {props.total}</p>
+        <div className={`member-card ${isSelected ? 'selected' : ''}`} onClick={handleClick}>
+            <p>{props.fname} {props.lname}</p>
+            <p>Username: @{props.member_name}</p>
+            <p>Total Messages: {props.total}</p>
         </div>
     );
 }
@@ -51,6 +51,22 @@ function MemberCollection(props) {
                 setMembers(data)
             });
     }, [searchText]);
+
+    React.useEffect(() => {
+        const testChart = new Chart(
+            document.querySelector('#test-chart'),
+            {
+                type: 'line',
+                data: {
+                    labels: ['does', 'this', 'work'],
+                    datasets: [
+                        {data: [2, 4, 8]}
+                    ]
+                }
+            }
+        );
+    }, []);
+
 
     return (
         <React.Fragment>
