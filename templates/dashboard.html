@@ -13,12 +13,32 @@
     <div class="container" >
         <div class="row">
 
-            <div class="col-md-6" id="members">
+            <div class="col-lg-6" id="members">
 
             </div>
 
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <h2 class="text-center"> Data viz </h2>
+
+                <canvas id="test-chart"></canvas>
+
+
+                <script>
+                    const testChart = new Chart(
+                        document.querySelector('#test-chart'),
+                        {
+                            type: 'line',
+                            data: {
+                                labels: ['does', 'this', 'work'],
+                                datasets: [
+                                    {data: [2, 4, 8]}
+                                ]
+                            }
+                        }
+                    );
+                </script>
+
+
             </div>
 
 
