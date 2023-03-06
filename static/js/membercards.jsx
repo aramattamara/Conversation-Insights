@@ -38,6 +38,7 @@ function MemberList(props) {
     return <div>{MemberCards}</div>
 }
 
+let testChart;
 function MemberCollection(props) {
 
     const [members, setMembers] = React.useState([]);
@@ -53,19 +54,52 @@ function MemberCollection(props) {
     }, [searchText]);
 
     React.useEffect(() => {
-        const testChart = new Chart(
+        let member_name_array = [];
+        let total_mes = [];
+
+        for (let member of members) {
+            let member_name = member['first_name'];
+            let total = member['total'];
+            member_name_array.push(member_name);
+            total_mes.push(total);
+        }
+
+
+        if (testChart) {
+            testChart.destroy();
+            testChart = null;
+        }
+
+        testChart = new Chart(
             document.querySelector('#test-chart'),
             {
-                type: 'line',
+                type: 'bar',
                 data: {
-                    labels: ['does', 'this', 'work'],
+                    labels: member_name_array,
                     datasets: [
-                        {data: [2, 4, 8]}
+                        {data: total_mes}
                     ]
-                }
+                },
+                options: {
+                    datasets: {
+                        bar: {
+                            backgroundColor: () => randomColor(),
+                        },
+                    },
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    min: 0,
+                                    max: 40,
+                                },
+                            },
+                        ],
+                    },
+                },
             }
         );
-    }, []);
+    }, [members]);
 
 
     return (
