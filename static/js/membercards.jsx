@@ -7,7 +7,7 @@ function MemberCard(props) {
     // };
 
     return (
-        <div className={`member-card ${props.selected ? 'selected' : ''}`}
+        <div className={`card member-card ${props.selected ? 'selected' : ''}`}
              onClick={props.toggleSelected}>
             <p>{props.fname} {props.lname}</p>
             <p>Username: @{props.member_name}</p>
@@ -16,46 +16,18 @@ function MemberCard(props) {
     );
 }
 
-function MemberList(props) {
+let testChart;
+function MemberCollection(props) {
+
+    const [members, setMembers] = React.useState([]);
     const [selectedMemberIds, setSelectedMemberIds] = React.useState({});
-
-    // let selectedMemberIds = [23, 34];
-    // let selected = selectedMemberIds.indexOf(member.member_id) != -1
-
-    // let selectedMemberIds = {23: true, 34: false};
-    // let selected = selectedMemberIds[member.member_id];
+    const [searchText, setSearchText] = React.useState('');
 
     function toggleSetSelected(memberId) {
         let newSelectedMemberIds = {...selectedMemberIds};
         newSelectedMemberIds[memberId] = !newSelectedMemberIds[memberId];
         setSelectedMemberIds(newSelectedMemberIds);
     }
-
-    const MemberCards = [];
-    for (const member of props.members) {
-        MemberCards.push(
-            <MemberCard
-                key={member.member_id}
-                selected={selectedMemberIds[member.member_id]}
-                toggleSelected={() => toggleSetSelected(member.member_id)}
-                fname={member.first_name}
-                lname={member.last_name}
-                member_name={member.member_name}
-                total={member.total}
-            />,
-        );
-    }
-
-    return <div>{MemberCards}</div>
-}
-
-let testChart;
-function MemberCollection(props) {
-
-    const [members, setMembers] = React.useState([]);
-
-    const [searchText, setSearchText] = React.useState('');
-
     React.useEffect(() => {
         fetch('/search.json?search-text=' + encodeURIComponent(searchText))
             .then((response) => response.json())
@@ -112,11 +84,24 @@ function MemberCollection(props) {
         );
     }, [members]);
 
+    const MemberCards = [];
+    for (const member of members) {
+        MemberCards.push(
+            <MemberCard
+                key={member.member_id}
+                selected={selectedMemberIds[member.member_id]}
+                toggleSelected={() => toggleSetSelected(member.member_id)}
+                fname={member.first_name}
+                lname={member.last_name}
+                member_name={member.member_name}
+                total={member.total}
+            />,
+        );
+    }
 
     return (
         <React.Fragment>
             <div className="search-box">
-
                 <form id="search-result" className="text-center">
                     <h5><label htmlFor="search-text">Search Memeber:</label></h5>
                     <input type="text"
@@ -129,8 +114,8 @@ function MemberCollection(props) {
                 </form>
             </div>
             <br/>
-            <div className="card">
-                <MemberList members={members}/>
+            <div className="cards-list">
+                {MemberCards}
             </div>
         </React.Fragment>
     );

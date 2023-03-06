@@ -3,6 +3,11 @@ span.dashboard.glyphicon-search {
     color: #862424;
 }
 
+.cards-list {
+    border: 1px gray solid;
+    border-radius: 20px;
+}
+
 .member-card {
     background-color: #ffffff;
     color:  black;
