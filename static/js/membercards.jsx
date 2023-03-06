@@ -37,16 +37,26 @@ function MemberCollection(props) {
     }, [searchText]);
 
     React.useEffect(() => {
-        let member_name_array = [];
+        let memberNames = [];
         let total_mes = [];
 
+        // let isNoneSelected = true;
+        // for (let member of members) {
+        //     if (selectedMemberIds[member['member_id']]) {
+        //         isNoneSelected = false;
+        //         break;
+        //     }
+        // }
+
         for (let member of members) {
-            let member_name = member['first_name'];
+            if (!selectedMemberIds[member['member_id']]) {
+                continue;
+            }
+            let memberName = member['first_name'];
             let total = member['total'];
-            member_name_array.push(member_name);
+            memberNames.push(memberName);
             total_mes.push(total);
         }
-
 
         if (testChart) {
             testChart.destroy();
@@ -58,7 +68,7 @@ function MemberCollection(props) {
             {
                 type: 'bar',
                 data: {
-                    labels: member_name_array,
+                    labels: memberNames,
                     datasets: [
                         {data: total_mes}
                     ]
@@ -82,7 +92,7 @@ function MemberCollection(props) {
                 },
             }
         );
-    }, [members]);
+    }, [members, selectedMemberIds]);
 
     const MemberCards = [];
     for (const member of members) {
