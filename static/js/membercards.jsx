@@ -57,25 +57,33 @@ function MemberCollection(props) {
 
     return (
         <React.Fragment>
-            <div className="search-box">
-                <form id="search-result" className="text-center">
-                    <h5><label htmlFor="search-text">Search Memeber:</label></h5>
-                    <input type="text"
-                           id="search-text"
-                           className="form-control"
-                           placeholder="Search all"
-                           value={searchText}
-                           onChange={(e) => setSearchText(e.target.value)}
-                    />
-                </form>
+            <div className="row">
+                <div className="col-lg-6" id="members">
+                    <div className="search-box">
+                        <form id="search-result" className="text-center">
+                            <h5><label htmlFor="search-text">Search Memeber:</label></h5>
+                            <input type="text"
+                                   id="search-text"
+                                   className="form-control"
+                                   placeholder="Search all"
+                                   value={searchText}
+                                   onChange={(e) => setSearchText(e.target.value)}
+                            />
+                        </form>
+                    </div>
+                    <br/>
+                    <div className="cards-list">
+                        {MemberCards}
+                    </div>
+                </div>
+
+                <div className="col-lg-6">
+                    <h2 className="text-center"> Data viz </h2>
+                    <BarChart members={members} selectedMemberIds={selectedMemberIds}/>
+                </div>
             </div>
-            <br/>
-            <div className="cards-list">
-                {MemberCards}
-            </div>
-            <BarChart members={members} selectedMemberIds={selectedMemberIds}/>
         </React.Fragment>
     );
 }
 
-ReactDOM.render(<MemberCollection/>, document.getElementById('members'));
+ReactDOM.render(<MemberCollection/>, document.getElementById('container'));

@@ -36,7 +36,7 @@ function BarChart(props){
                 labels: memberNames,
                 datasets: [
                     {
-                        label: memberNames,
+                        label: "Total Messages",
                         data: total_mes,
                     }
                 ]
@@ -74,5 +74,6 @@ function BarChart(props){
         },
     );
 
-    return <div>kuku</div>;
+    return                     <canvas id="test-chart"></canvas>
+        ;
 }
