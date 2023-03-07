@@ -5,18 +5,18 @@ span.dashboard.glyphicon-search {
 
 .cards-list {
     border: 1px gray solid;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .member-card {
     background-color: #ffffff;
     color:  black;
     border: 2px solid black;
-    padding: 1em;
-    margin: 2em;
+    padding: 15px;
+    margin: 15px;
     height: auto;
-    width: 11em;
-    border-radius: 20px;
+    width: 190px;
+    border-radius: 10px;
     cursor: pointer;
     display: inline-block;
     text-align: center;

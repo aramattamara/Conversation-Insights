@@ -16,7 +16,6 @@ function MemberCard(props) {
     );
 }
 
-let testChart;
 function MemberCollection(props) {
 
     const [members, setMembers] = React.useState([]);
@@ -28,6 +27,7 @@ function MemberCollection(props) {
         newSelectedMemberIds[memberId] = !newSelectedMemberIds[memberId];
         setSelectedMemberIds(newSelectedMemberIds);
     }
+
     React.useEffect(() => {
         fetch('/search.json?search-text=' + encodeURIComponent(searchText))
             .then((response) => response.json())
@@ -36,63 +36,9 @@ function MemberCollection(props) {
             });
     }, [searchText]);
 
-    React.useEffect(() => {
-        let memberNames = [];
-        let total_mes = [];
 
-        // let isNoneSelected = true;
-        // for (let member of members) {
-        //     if (selectedMemberIds[member['member_id']]) {
-        //         isNoneSelected = false;
-        //         break;
-        //     }
-        // }
 
-        for (let member of members) {
-            if (!selectedMemberIds[member['member_id']]) {
-                continue;
-            }
-            let memberName = member['first_name'];
-            let total = member['total'];
-            memberNames.push(memberName);
-            total_mes.push(total);
-        }
 
-        if (testChart) {
-            testChart.destroy();
-            testChart = null;
-        }
-
-        testChart = new Chart(
-            document.querySelector('#test-chart'),
-            {
-                type: 'bar',
-                data: {
-                    labels: memberNames,
-                    datasets: [
-                        {data: total_mes}
-                    ]
-                },
-                options: {
-                    datasets: {
-                        bar: {
-                            backgroundColor: () => randomColor(),
-                        },
-                    },
-                    scales: {
-                        yAxes: [
-                            {
-                                ticks: {
-                                    min: 0,
-                                    max: 40,
-                                },
-                            },
-                        ],
-                    },
-                },
-            }
-        );
-    }, [members, selectedMemberIds]);
 
     const MemberCards = [];
     for (const member of members) {
@@ -127,6 +73,7 @@ function MemberCollection(props) {
             <div className="cards-list">
                 {MemberCards}
             </div>
+            <BarChart members={members} selectedMemberIds={selectedMemberIds}/>
         </React.Fragment>
     );
 }
