@@ -37,9 +37,6 @@ function MemberCollection(props) {
     }, [searchText]);
 
 
-
-
-
     const MemberCards = [];
     for (const member of members) {
         MemberCards.push(
