@@ -1,4 +1,4 @@
-let testChart;
+let barChart;
 
 function BarChart(props){
     let memberNames = [];
@@ -23,13 +23,13 @@ function BarChart(props){
     }
 
 
-    if (testChart) {
-        testChart.destroy();
-        testChart = null;
+    if (barChart) {
+        barChart.destroy();
+        barChart = null;
     }
 
-    testChart = new Chart(
-        document.querySelector('#test-chart'),
+    barChart = new Chart(
+        document.querySelector('#bar-chart'),
         {
             type: 'bar',
             data: {
@@ -74,6 +74,5 @@ function BarChart(props){
         },
     );
 
-    return                     <canvas id="test-chart"></canvas>
-        ;
+    return <canvas id="bar-chart"></canvas>;
 }
