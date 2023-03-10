@@ -38,25 +38,23 @@ def dashboard():
     return render_template("dashboard.html")
 
 
-@app.route("/members.json")
+# ####################### DASHBOARD (SHOWA ALL MEMBERS) ###############
+@app.route("/api/get_members.json")
 def get_members_json():
-
     members: List[Member] = crud.get_members()
-
-    dd = []
+    result_json = []
     for member in members:
-        d = member.to_dict_with_count()
-        dd.append(d)
-    return jsonify(dd)
+        members_d = member.to_dict_with_count()
+        result_json.append(members_d)
+    return jsonify(result_json)
 
 
-@app.route("/users")
-def get_users():
+@app.route("/members")
+def get_members():
     """View all users."""
 
-    users = crud.get_members()
-
-    return render_template("dashboard.html", users=users)
+    members = crud.get_members()
+    return render_template("dashboard.html", members=members)
 
 
 @app.route('/upload')
@@ -70,14 +68,14 @@ def handle_upload():
     return render_template("dashboard.html", my_dict=my_dict)
 
 
+
+
+
 # ################### DASHBOARD (MEMBER SEARCH) ################### #
-
-
 @app.route('/search.json', methods=["GET"])
 def process_member_search():
 
     member_search = request.args.get("search-text")
-
     members = crud.search_members(member_search)
 
     result_json = []
@@ -87,8 +85,11 @@ def process_member_search():
     return jsonify(result_json)
 
 
-# @app.route('/messages.json', methods=["POST"])
+@app.route('/mes_per_month.json', methods=["GET"])
+def mes_per_month():
 
+    members_with_agg = crud.mes_per_month_per_user()
+    return jsonify(members_with_agg)
 
 
 if __name__ == "__main__":

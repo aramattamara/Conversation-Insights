@@ -1,37 +1,30 @@
 let chartMesPerMonth;
 
-function ChartMesPerMonth(props){
+function ChartMesPerMonth(props) {
+    let memberNames = []
+    let total_mes = []
+
+
+    for (let member of props.members){
+
+    }
+
     React.useEffect(() => {
-        fetch('/yjkyi.json?search-text')
-            .then((response) => response.json())
-            .then((data) => {
-                setMessages(data)
-            });
-    }, [searchText]);
-
-
-
-
-
-    chartMesPerMonth = new Chart(
-        document.querySelector('#test-chart'),
-        {
-            type: 'bar',
-            data: {
-                labels: memberNames,
-                datasets: [
-                    {
-                        label: "Total Messages",
-                        data: total_mes,
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    colorschemes: {
-                        scheme: 'brewer'
-                    },
+        chartMesPerMonth = new Chart(
+            document.querySelector('#chart-mes-per-month'),
+            {
+                type: 'line',
+                data: {
+                    labels: memberNames,
+                    datasets: [
+                        {
+                            label: "Total Messages",
+                            data: total_mes,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
                     tooltip: {
                         mode: 'index',
                         intersect: false
@@ -57,8 +50,8 @@ function ChartMesPerMonth(props){
                     },
                 },
             },
-        },
-    );
+        );
+    }, []);
 
-    return <canvas id="test-chart"></canvas>;
+    return <canvas id="chart_mes_per_month"></canvas>;
 }
