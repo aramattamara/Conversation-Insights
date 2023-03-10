@@ -1,6 +1,6 @@
 let barChart;
 
-function BarChart(props){
+function BarChart(props) {
     let memberNames = [];
     let total_mes = [];
 
@@ -22,57 +22,58 @@ function BarChart(props){
         total_mes.push(total);
     }
 
+    React.useEffect(() => {
+        if (barChart) {
+            barChart.destroy();
+            barChart = null;
+        }
 
-    if (barChart) {
-        barChart.destroy();
-        barChart = null;
-    }
-
-    barChart = new Chart(
-        document.querySelector('#bar-chart'),
-        {
-            type: 'bar',
-            data: {
-                labels: memberNames,
-                datasets: [
-                    {
-                        label: "Total Messages",
-                        data: total_mes,
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false
-                    },
-                    title: {
-                        display: true,
-                        text: 'Chart Total Vizualization'
-                    },
-                    colorschemes: {
-                        scheme: 'brewer.Paired12'
-                    },
+        barChart = new Chart(
+            document.querySelector('#bar-chart'),
+            {
+                type: 'bar',
+                data: {
+                    labels: memberNames,
+                    datasets: [
+                        {
+                            label: "Total Messages",
+                            data: total_mes,
+                        }
+                    ]
                 },
-                datasets: {
-                    // bar: {
-                    //     color: () => randomColor(),
-                    // },
-                },
-                scales: {
-                    y: {
-                        min: 0,
-                        max: 50,
-                        ticks: {
-                            stepSize: 5,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Chart Total Vizualization'
+                        },
+                        colorschemes: {
+                            scheme: 'brewer.Paired12'
+                        },
+                    },
+                    datasets: {
+                        // bar: {
+                        //     color: () => randomColor(),
+                        // },
+                    },
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 50,
+                            ticks: {
+                                stepSize: 5,
+                            },
                         },
                     },
                 },
             },
-        },
-    );
+        );
+    }, [memberNames, total_mes]);
 
     return <canvas id="bar-chart"></canvas>;
 }
