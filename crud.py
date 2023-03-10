@@ -1,8 +1,8 @@
 """CRUD operations. """
 from datetime import datetime
 from typing import List
-from sqlalchemy import func
-from sqlalchemy import Date
+from sqlalchemy import func, extract, Date, Integer
+from datetime import datetime
 from model import db, Message, Member, connect_to_db
 
 
@@ -25,12 +25,36 @@ def get_msg() -> List[Message]:
 
 
 def mes_per_day_per_user():
-    """Function returns total counts per user per day"""
+    """Function returns total counts per day per user"""
     query = db.session.query(
         func.count().label('cnt'),
         func.to_timestamp(Message.date).cast(Date).label('day'),
         Message.member_id
     ).group_by('day', 'member_id')
+
+    result = query.all()
+    return result
+
+
+def mes_per_month_per_user():
+    """Function returns total counts per month per user"""
+    query = db.session.query(
+        func.count().label('cnt'),
+        extract('month', func.to_timestamp(Message.date).cast(Date)).cast(Integer).label("month"),
+        Message.member_id
+    ).group_by('month', 'member_id')
+
+    result = query.all()
+    return result
+
+
+def mes_per_year_per_user():
+    """Function returns total counts per year per user"""
+    query = db.session.query(
+        func.count().label('cnt'),
+        extract('year', func.to_timestamp(Message.date).cast(Date)).cast(Integer).label("year"),
+        Message.member_id
+    ).group_by('year', 'member_id')
 
     result = query.all()
     return result
