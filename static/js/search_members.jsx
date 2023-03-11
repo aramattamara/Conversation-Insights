@@ -1,15 +1,15 @@
-function SearchMember(){
+function SearchMembers(props) {
     const [searchText, setSearchText] = React.useState('');
 
     React.useEffect(() => {
         fetch('/search.json?search-text=' + encodeURIComponent(searchText))
             .then((response) => response.json())
             .then((data) => {
-                setMembers(data)
+                props.setMembers(data);
             });
     }, [searchText]);
 
-    return(
+    return (
         <div className="search-box">
             <form id="search-result" className="text-center">
                 <h5><label htmlFor="search-text">Search Memeber:</label></h5>

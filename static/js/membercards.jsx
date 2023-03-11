@@ -54,7 +54,7 @@ function MemberCollection() {
         <React.Fragment>
             <div className="row">
                 <div className="col-lg-6" id="members">
-
+                        <SearchMembers setMembers={setMembers}/>
                     <br/>
                     <div className="cards-list">
                         {MemberCards}

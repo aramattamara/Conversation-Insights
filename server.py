@@ -29,7 +29,6 @@ ALLOWED_EXTENSIONS = {'json'}
 @app.route("/")
 def homepage():
     """Show homepage."""
-
     return render_template("homepage.html")
 
 
@@ -52,23 +51,8 @@ def get_members_json():
 @app.route("/members")
 def get_members():
     """View all users."""
-
     members = crud.get_members()
     return render_template("dashboard.html", members=members)
-
-
-@app.route('/upload')
-def handle_upload():
-    if 'file' not in request.files:
-        flash('no file uploaded')
-        return
-    export_file = request.files['file']
-    my_dict = json.load(export_file.stream)
-
-    return render_template("dashboard.html", my_dict=my_dict)
-
-
-
 
 
 # ################### DASHBOARD (MEMBER SEARCH) ################### #
@@ -90,6 +74,17 @@ def mes_per_month():
 
     members_with_agg = crud.mes_per_month_per_user()
     return jsonify(members_with_agg)
+
+
+@app.route('/upload')
+def handle_upload():
+    if 'file' not in request.files:
+        flash('no file uploaded')
+        return
+    export_file = request.files['file']
+    my_dict = json.load(export_file.stream)
+
+    return render_template("dashboard.html", my_dict=my_dict)
 
 
 if __name__ == "__main__":
