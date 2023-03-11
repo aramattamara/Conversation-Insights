@@ -48,13 +48,6 @@ def get_members_json():
     return jsonify(result_json)
 
 
-@app.route("/members")
-def get_members():
-    """View all users."""
-    members = crud.get_members()
-    return render_template("dashboard.html", members=members)
-
-
 # ################### DASHBOARD (MEMBER SEARCH) ################### #
 @app.route('/search.json', methods=["GET"])
 def process_member_search():

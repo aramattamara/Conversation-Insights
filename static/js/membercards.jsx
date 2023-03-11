@@ -49,6 +49,13 @@ function MemberCollection() {
             />,
         );
     }
+    if (MemberCards.length == 0){
+        MemberCards.push(
+            <div className="not-found">
+                No members found...
+            </div>
+        )
+    }
 
     return (
         <React.Fragment>

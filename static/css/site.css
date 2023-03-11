@@ -26,3 +26,10 @@ span.dashboard.glyphicon-search {
     background-color: #ADD8E6;
     color: white;
 }
+
+.not-found{
+    padding: 15px;
+    margin: 15px;
+    height: auto;
+    width: 190px;
+}
