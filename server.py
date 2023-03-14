@@ -64,10 +64,15 @@ def process_member_search():
 def mes_per_month():
     members_with_agg = crud.mes_per_month_per_user()
 
-    result_dict = []
+    result_dict = {}
     for res in members_with_agg:
-        res_agg = {"cnt": res[0], "month": res[1], "member_id": res[2]}
-        result_dict.append(res_agg)
+        # res_agg = {"cnt": res[0], "month": res[1], "member_id": res[2]}
+        # result_dict.append(res_agg)
+        res_agg = {"cnt": res[0], "month": res[1]}
+
+        member_months = result_dict.get(res[2], [])
+        result_dict[res[2]] = member_months
+        result_dict[res[2]].append(res_agg)
 
     print(result_dict)
     return jsonify(result_dict)
