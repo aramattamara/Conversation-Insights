@@ -21,7 +21,6 @@ app.secret_key = "dev"
 # So that undefined variables in Jinja2 will strike an error vs. failing silently
 app.jinja_env.undefined = StrictUndefined
 
-
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 ALLOWED_EXTENSIONS = {'json'}
 
@@ -51,7 +50,6 @@ def get_members_json():
 # ################### DASHBOARD (MEMBER SEARCH) ################### #
 @app.route('/search.json', methods=["GET"])
 def process_member_search():
-
     member_search = request.args.get("search-text")
     members = crud.search_members(member_search)
 
@@ -62,11 +60,17 @@ def process_member_search():
     return jsonify(result_json)
 
 
-@app.route('/mes_per_month.json', methods=["GET"])
+@app.route('/api/mes_per_month.json', methods=["GET"])
 def mes_per_month():
-
     members_with_agg = crud.mes_per_month_per_user()
-    return jsonify(members_with_agg)
+
+    result_dict = []
+    for res in members_with_agg:
+        res_agg = {"cnt": res[0], "month": res[1], "member_id": res[2]}
+        result_dict.append(res_agg)
+
+    print(result_dict)
+    return jsonify(result_dict)
 
 
 @app.route('/upload')

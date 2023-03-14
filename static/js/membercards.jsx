@@ -49,9 +49,10 @@ function MemberCollection() {
             />,
         );
     }
-    if (MemberCards.length == 0){
+
+    if (MemberCards.length === 0){
         MemberCards.push(
-            <div className="not-found">
+            <div key='0' className="not-found">
                 No members found...
             </div>
         )
