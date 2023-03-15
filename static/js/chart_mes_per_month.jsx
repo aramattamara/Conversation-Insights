@@ -38,46 +38,79 @@ function ChartMesPerMonth(props) {
         //     months.push(a['month'].toString());
         // }
         // const months = memberMonthCounts.map((a) => a['month']);
-        const m = new Map(Object.entries(memberMonthCounts));
+
+        // E.g. {388268832: [{'cnt': 5, 'month': 3}]}
+        const member = new Map(Object.entries(memberMonthCounts));
         console.log('start');
 
-        const datasets = [];
-        for (let [key, value] of m) {
-            let data = {
-                'x': value.map((v) => v['cnt']),
-                'y': value.map((v) => v['month']),
-            };
-            console.log(data);
+
+        let datasets = [];
+        for (let [key, value] of member) {
+
+            let data = {};
+            for (let i in value) {
+                let mm = value[i];
+                let monName = MONTHS[mm['month'] - 1];
+                data[monName] = mm['cnt'];
+            }
+
+            // console.log(data);
             datasets.push({
                 label: "Member " + key,
                 data: data
             });
         }
+        console.log(datasets);
+
+        // datasets = [{
+        //     label: "Member 123",
+        //     data: {
+        //         'July': 10,
+        //         'August': 20,
+        //     }
+        // }]
 
         chartMesPerMonth = new Chart(chartContainer, {
-            type: 'line', data: {
-                // labels: memberMonthCounts,
+            type: 'line',
+            data: {
                 datasets: datasets,
-            }, options: {
-                responsive: true, tooltip: {
-                    mode: 'index', intersect: false
-                }, title: {
-                    display: true, text: 'Chart by Months Vizualization'
-                },
-
-            }, datasets: {
-                // bar: {
-                //     color: () => randomColor(),
-                // },
-            }, scales: {
-                y: {
-                    min: 0, max: 50, ticks: {
-                        stepSize: 5,
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
                     },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'By Month'
+                    },
+                    colorschemes: {
+                        scheme: 'brewer.Paired12'
+                    },
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            tickColor: 'red'
+                        },
+                        ticks: {
+                            color: 'blue',
+                        }
+                    },
+                    y: {
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                    }
                 },
             },
         },);
+
     }, [memberNames, memberMonthCounts]);
 
-    return <canvas id="chart_mes_per_month"></canvas>;
+    return <canvas id="chart_mes_per_month" width="400" height="300"></canvas>;
 }

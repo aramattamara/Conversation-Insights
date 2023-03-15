@@ -69,8 +69,8 @@ function MemberCollection() {
                     </div>
                 </div>
                 <div className="col-lg-6">
-                    <h2 className="text-center"> Data viz </h2>
-                    {/*<BarChart members={members} selectedMemberIds={selectedMemberIds}/>*/}
+                    <h2 className="text-center"> Data Vizualization  </h2>
+                    <BarChart members={members} selectedMemberIds={selectedMemberIds}/>
                     <ChartMesPerMonth members={members} selectMemberIds={selectedMemberIds}/>
                 </div>
             </div>

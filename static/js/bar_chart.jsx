@@ -50,7 +50,7 @@ function BarChart(props) {
                         },
                         title: {
                             display: true,
-                            text: 'Chart Total Vizualization'
+                            text: 'Total'
                         },
                         colorschemes: {
                             scheme: 'brewer.Paired12'
@@ -62,6 +62,11 @@ function BarChart(props) {
                         // },
                     },
                     scales: {
+                        x: {
+                            border: {
+                                color: 'red'
+                            },
+                        },
                         y: {
                             min: 0,
                             max: 50,

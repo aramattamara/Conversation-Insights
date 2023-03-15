@@ -36,14 +36,27 @@ def mes_per_day_per_user() -> List[Row]:
     result = query.all()
     return result
 
+#
+# def mes_per_month_per_user() -> List[Row]:
+#     """Function returns total counts per month per user"""
+#     query = db.session.query(
+#         func.count().label('cnt'),
+#         extract('month', func.to_timestamp(Message.date).cast(Date)).cast(Integer).label("month"),
+#         Message.member_id
+#     ).group_by('month', 'member_id')
+#
+#     result = query.all()
+#     return result
+
 
 def mes_per_month_per_user() -> List[Row]:
     """Function returns total counts per month per user"""
     query = db.session.query(
         func.count().label('cnt'),
+        extract('year', func.to_timestamp(Message.date).cast(Date)).cast(Integer).label("year"),
         extract('month', func.to_timestamp(Message.date).cast(Date)).cast(Integer).label("month"),
         Message.member_id
-    ).group_by('month', 'member_id')
+    ).group_by('year', 'month', 'member_id')
 
     result = query.all()
     return result

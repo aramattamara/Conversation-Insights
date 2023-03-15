@@ -1,17 +1,17 @@
 import json
-from typing import Dict, List
+from typing import List
 
 # Import web templating language
 from jinja2 import StrictUndefined
 
 # Import Flask web framework
-from flask import Flask, jsonify, session, render_template, request, flash, redirect
+from flask import Flask, jsonify, render_template, request, flash
 
 # Import crud that handles SQLAlchemy queries
 import crud
 
 # Import model.py table definitions
-from model import Message, connect_to_db, Member
+from model import connect_to_db, Member
 
 app = Flask(__name__)
 
@@ -68,11 +68,10 @@ def mes_per_month():
     for res in members_with_agg:
         # res_agg = {"cnt": res[0], "month": res[1], "member_id": res[2]}
         # result_dict.append(res_agg)
-        res_agg = {"cnt": res[0], "month": res[1]}
-
-        member_months = result_dict.get(res[2], [])
-        result_dict[res[2]] = member_months
-        result_dict[res[2]].append(res_agg)
+        res_agg = {"cnt": res[0], "year-month": f'{res[1]}-{res[2]}'}
+        member_months = result_dict.get(res[3], [])
+        result_dict[res[3]] = member_months
+        result_dict[res[3]].append(res_agg)
 
     print(result_dict)
     return jsonify(result_dict)

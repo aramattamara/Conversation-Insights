@@ -12,7 +12,7 @@ function SearchMembers(props) {
     return (
         <div className="search-box">
             <form id="search-result" className="text-center">
-                <h5><label htmlFor="search-text">Search Memeber:</label></h5>
+                <h5><label htmlFor="search-text">Search Member:</label></h5>
                 <input type="text"
                        id="search-text"
                        className="form-control"

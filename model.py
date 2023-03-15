@@ -25,9 +25,10 @@ class Message(db.Model):
 
 
 class Member(db.Model, SerializerMixin):
-    """A user."""
+    """A member."""
 
     __tablename__ = "members"
+
     member_id = db.Column(db.Integer, nullable=False, primary_key=True)
     member_name = db.Column(db.String)
     first_name = db.Column(db.String)

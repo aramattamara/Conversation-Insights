@@ -38,11 +38,11 @@ def save_data(data: Dict):
         if "text" not in i["message"]:
             continue
 
-        member = Member(member_id=i["message"]["from"]["id"],
-                        member_name=i["message"]["from"]["username"],
-                        first_name=i["message"]["from"]["first_name"],
-                        last_name=i["message"]["from"]["last_name"],
-
+        message_from = i["message"]["from"]
+        member = Member(member_id=message_from["id"],
+                        member_name=message_from["username"],
+                        first_name=message_from.get("first_name", None),
+                        last_name=message_from.get("last_name", None)
                         )
         members.append(member)
 
@@ -51,7 +51,7 @@ def save_data(data: Dict):
 
         message = Message(update_id=i["update_id"],
                           message_id=i["message"]["message_id"],
-                          member_id=i["message"]["from"]["id"],
+                          member_id=message_from["id"],
                           date=i["message"]["date"],
                           content=i["message"]["text"]
                           )
