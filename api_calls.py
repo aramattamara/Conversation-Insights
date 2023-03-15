@@ -35,8 +35,17 @@ def save_data(data: Dict):
         print(i)
         if "message" not in i:
             continue
-        if "text" not in i["message"]:
+
+        content = None
+        if "text" in i["message"]:
+            content = i["message"]["text"]
+        elif "sticker" in i["message"]:
+            content = 'sticker'
+        elif "content" in i["message"]:
+            content = i["message"]["content"]
+        elif "new_chat_participant" in i["message"]:
             continue
+
 
         message_from = i["message"]["from"]
         member = Member(member_id=message_from["id"],
@@ -53,7 +62,7 @@ def save_data(data: Dict):
                           message_id=i["message"]["message_id"],
                           member_id=message_from["id"],
                           date=i["message"]["date"],
-                          content=i["message"]["text"]
+                          content=content,
                           )
         messages.append(message)
 

@@ -18,7 +18,7 @@ class Message(db.Model):
     member_id = db.Column(db.Integer, db.ForeignKey("members.member_id"))
     # chat_id = db.Column(db.Integer, db.ForeignKey("chats.chat_id"))
     date = db.Column(db.Integer, nullable=False)
-    content = db.Column(db.String, nullable=False, default="Unknown")
+    content = db.Column(db.String, nullable=True, default="Unknown")
 
     def __repr__(self):
         return f"<Message message_id={self.message_id} content={self.content} date={self.date}>"
