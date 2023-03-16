@@ -68,7 +68,7 @@ def mes_per_month():
     for res in members_with_agg:
         # res_agg = {"cnt": res[0], "month": res[1], "member_id": res[2]}
         # result_dict.append(res_agg)
-        res_agg = {"cnt": res[0], "year-month": f'{res[1]}-{res[2]}'}
+        res_agg = {"cnt": res[0], "year": res[1], "month": res[2]}
         member_months = result_dict.get(res[3], [])
         result_dict[res[3]] = member_months
         result_dict[res[3]].append(res_agg)

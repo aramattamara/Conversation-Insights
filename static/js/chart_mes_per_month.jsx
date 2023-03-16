@@ -50,7 +50,7 @@ function ChartMesPerMonth(props) {
             let data = {};
             for (let i in value) {
                 let mm = value[i];
-                let monName = MONTHS[mm['month'] - 1];
+                let monName = MONTHS[mm["month"] - 1] + " " + mm["year"];
                 data[monName] = mm['cnt'];
             }
 
