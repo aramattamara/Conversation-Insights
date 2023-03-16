@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
-{% block title %}Telegram Analytics{% endblock %}
+{% block title %}Conversation Insights{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>Welcome!</h1>
     <h2>Get analytics</h2>
     <form action="/upload" method="POST" enctype="multipart/form-data">
         <input type="file" name="file"/>
         <input type="submit"/>
     </form>
+
+    <div class="mastfoot">
+        <div class="inner">
+            Designed and developed by <a class="mainpage-links" href="https://github.com/aramattamara">Tamara Vashchuk</a>. Built at <a class="mainpage-links" href="https://hackbrightacademy.com/">Hackbright Academy</a>.
+            <p>2023 Conversation Insights. All Rights Reserved.</p>
+        </div>
+    </div>
 {% endblock %}
