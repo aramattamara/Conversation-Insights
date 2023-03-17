@@ -62,7 +62,7 @@ def process_member_search():
 
 @app.route('/api/mes_per_month.json', methods=["GET"])
 def mes_per_month():
-    selectedIds: List[str] = request.args.get(['selectedIds'].split(','))
+    selectedIds: List[str] = request.args['selectedIds'].split(',')
     print(selectedIds)
 
     members_with_agg = crud.mes_per_month_per_user(selectedIds)

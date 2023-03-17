@@ -2,7 +2,6 @@ let chartMesPerMonth;
 
 function ChartMesPerMonth(props) {
     let memberNames = [];
-
     for (let member of props.selectedMembers) {
         let memberName = member['first_name'];
         memberNames.push(memberName);
@@ -12,19 +11,24 @@ function ChartMesPerMonth(props) {
     for (let member of props.selectedMembers) {
         memberById[member['member_id']] = member;
     }
-    console.log(memberById);
+    // console.log(memberById);
 
     const [memberMonthCounts, setMemberMonthCounts] = React.useState([]);
     // const [totalMes, setTotalMes] = React.useState([]);
     const selectedMemberIds = props.selectedMembers.map((m) => m['member_id']);
 
     React.useEffect(() => {
-        fetch('/api/mes_per_month.json?selectedIds=' + selectedMemberIds.join(','))
-            .then((response) => response.json())
-            .then((result) => {
-                setMemberMonthCounts(result);
-            });
-    }, []);
+        if (selectedMemberIds.length > 0) {
+            fetch('/api/mes_per_month.json?selectedIds=' + selectedMemberIds.join(','))
+                .then((response) => response.json())
+                .then((result) => {
+                    setMemberMonthCounts(result);
+                });
+        }
+        else {
+            setMemberMonthCounts([])
+        }
+    }, [props.selectedMembers]);
 
 
     React.useEffect(() => {
@@ -70,7 +74,7 @@ function ChartMesPerMonth(props) {
 
             // console.log(data);
             datasets.push({
-                label: "Member " + memberId ,
+                label: "Member " + memberById[memberId]["first_name"],
                 data: data
             });
         }
@@ -124,7 +128,7 @@ function ChartMesPerMonth(props) {
             },
         },);
 
-    }, [memberNames, memberMonthCounts]);
+    }, [memberMonthCounts]);
 
     return <canvas id="chart_mes_per_month" width="400" height="300"></canvas>;
 }
