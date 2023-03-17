@@ -58,6 +58,13 @@ function MemberCollection() {
         )
     }
 
+    const selectedMembers = [];
+    for (let member of members) {
+        if (selectedMemberIds[member['member_id']]) {
+            selectedMembers.push(member);
+        }
+    }
+
     return (
         <React.Fragment>
             <div className="row">
@@ -70,8 +77,8 @@ function MemberCollection() {
                 </div>
                 <div className="col-lg-6">
                     <h2 className="text-center"> Data Vizualization  </h2>
-                    <BarChart members={members} selectedMemberIds={selectedMemberIds}/>
-                    <ChartMesPerMonth members={members} selectMemberIds={selectedMemberIds}/>
+                    <BarChart selectedMembers={selectedMembers}/>
+                    <ChartMesPerMonth selectedMembers={selectedMembers} />
                 </div>
             </div>
         </React.Fragment>

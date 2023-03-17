@@ -41,6 +41,16 @@ the platform, develop new features, or inform marketing and advertising strategi
 
 * Telegram API
 
+## Features
+
+Message frequency analysis: This feature could show users how frequently they send and receive messages, which could be
+helpful for identifying patterns in messaging behavior and improving overall productivity.
+
+User behavior insights: This feature shows who is the most active member of the chat.
+
+Search: This feature helps navigate throught all members of chat and easy find them.
+
+
 ## <a name="design"></a>Design
 
 * Design elements implemented using [Bootstrap](http://getbootstrap.com/), HTML5 and CSS3.

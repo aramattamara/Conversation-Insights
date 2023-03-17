@@ -12,10 +12,8 @@ function BarChart(props) {
     //     }
     // }
 
-    for (let member of props.members) {
-        if (!props.selectedMemberIds[member['member_id']]) {
-            continue;
-        }
+
+    for (let member of props.selectedMembers) {
         let memberName = member['first_name'];
         let total = member['total'];
         memberNames.push(memberName);

@@ -3,20 +3,23 @@ let chartMesPerMonth;
 function ChartMesPerMonth(props) {
     let memberNames = [];
 
+    for (let member of props.selectedMembers) {
+        let memberName = member['first_name'];
+        memberNames.push(memberName);
+    }
 
-    // for (let member of props.members) {
-    //     if (!props.selectedMemberIds[member['member_id']]) {
-    //         continue;
-    //     }
-    //     let memberName = member['first_name'];
-    //     memberNames.push(memberName);
-    // }
+    const memberById = {};
+    for (let member of props.selectedMembers) {
+        memberById[member['member_id']] = member;
+    }
+    console.log(memberById);
 
     const [memberMonthCounts, setMemberMonthCounts] = React.useState([]);
-    // const [totalMes, setTotalMes] = React.useState([])
+    // const [totalMes, setTotalMes] = React.useState([]);
+    const selectedMemberIds = props.selectedMembers.map((m) => m['member_id']);
 
     React.useEffect(() => {
-        fetch('/api/mes_per_month.json')
+        fetch('/api/mes_per_month.json?selectedIds=' + selectedMemberIds.join(','))
             .then((response) => response.json())
             .then((result) => {
                 setMemberMonthCounts(result);
@@ -39,14 +42,25 @@ function ChartMesPerMonth(props) {
         // }
         // const months = memberMonthCounts.map((a) => a['month']);
 
-        // E.g. {388268832: [{'cnt': 5, 'month': 3}]}
-        const member = new Map(Object.entries(memberMonthCounts));
+
+        // E.g. {388268832: [{'cnt': 5, 'year': 2023, 'month': 3}]}
+        const stats = new Map(Object.entries(memberMonthCounts));
         console.log('start');
 
+        const selectedStats = {};
+        for (let [memberId, value] of stats) {
+            if (memberById[memberId]) {
+                selectedStats[memberId] = value;
+            }
+        }
 
         let datasets = [];
-        for (let [key, value] of member) {
+        for (let [memberId, value] of stats) {
+            if (!memberById[memberId]) {
+                continue;
+            }
 
+            // E.g. {'January': 123}
             let data = {};
             for (let i in value) {
                 let mm = value[i];
@@ -56,7 +70,7 @@ function ChartMesPerMonth(props) {
 
             // console.log(data);
             datasets.push({
-                label: "Member " + key,
+                label: "Member " + memberId ,
                 data: data
             });
         }
