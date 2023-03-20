@@ -13,9 +13,9 @@ class Message(db.Model):
 
     __tablename__ = "messages"
 
-    update_id = db.Column(db.Integer, nullable=False, primary_key=True)
-    message_id = db.Column(db.Integer, nullable=False)
-    member_id = db.Column(db.Integer, db.ForeignKey("members.member_id"))
+    message_id = db.Column(db.Integer, nullable=False, primary_key=True)
+    update_id = db.Column(db.Integer, nullable=True)
+    member_id = db.Column(db.BigInteger, db.ForeignKey("members.member_id"))
     # chat_id = db.Column(db.Integer, db.ForeignKey("chats.chat_id"))
     date = db.Column(db.Integer, nullable=False)
     content = db.Column(db.String, nullable=True, default="Unknown")
@@ -29,7 +29,7 @@ class Member(db.Model, SerializerMixin):
 
     __tablename__ = "members"
 
-    member_id = db.Column(db.Integer, nullable=False, primary_key=True)
+    member_id = db.Column(db.BigInteger, nullable=False, primary_key=True)
     member_name = db.Column(db.String)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
