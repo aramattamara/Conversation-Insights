@@ -10,3 +10,4 @@ import server
 model.connect_to_db(server.app)
 model.db.create_all()
 
+def fake_data():

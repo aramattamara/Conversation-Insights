@@ -15,9 +15,9 @@ def get_members():
 def search_members(search_value) -> List[Member]:
     """Checks if member exists in DB. If so returns instantiated Member (User) object.
     Returns none if member not found"""
-    return Member.query.filter((Member.first_name.like(f'%{search_value}%')) |
-                               (Member.last_name.like(f'%{search_value}%')) |
-                               (Member.member_name.like(f'%{search_value}%'))).all()
+    return Member.query.filter((Member.first_name.ilike(f'%{search_value}%')) |
+                               (Member.last_name.ilike(f'%{search_value}%')) |
+                               (Member.member_name.ilike(f'%{search_value}%'))).all()
 
 
 def get_msg() -> List[Message]:
@@ -51,12 +51,16 @@ def mes_per_day_per_user() -> List[Row]:
 
 def mes_per_month_per_user(selectedIds) -> List[Row]:
     """Function returns total counts per month per user"""
-    query = db.session.query(
+    query = (db.session.query(
         func.count().label('cnt'),
         extract('year', func.to_timestamp(Message.date).cast(Date)).cast(Integer).label("year"),
         extract('month', func.to_timestamp(Message.date).cast(Date)).cast(Integer).label("month"),
         Message.member_id
-    ) .filter(Message.member_id.in_(selectedIds)).group_by('year', 'month', 'member_id')
+    )
+             .filter(Message.member_id.in_(selectedIds))
+             .group_by('year', 'month', 'member_id')
+             .order_by('year', 'month', 'member_id')
+             )
 
     result = query.all()
     return result

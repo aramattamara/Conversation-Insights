@@ -88,6 +88,8 @@ def handle_upload():
     export_file = request.files['file']
     my_dict = json.load(export_file.stream)
 
+    json.dump(my_dict, 'sdfsdf.json')
+
     return render_template("dashboard.html", my_dict=my_dict)
 
 
