@@ -34,6 +34,9 @@ class Member(db.Model, SerializerMixin):
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
 
+    # def __init__(self, member_id: int):
+    #     self.member_id = member_id
+
     def __repr__(self):
         return f"<Member member_id={self.member_id}>"
 
