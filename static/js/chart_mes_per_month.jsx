@@ -66,19 +66,20 @@ function ChartMesPerMonth(props) {
             }
 
             const date = new Date(value[0]["year"], value[0]["month"]-1, 1)
+            console.log(date)
             // E.g. {'January': 123}
             let data = {};
             for (let i in value) {
-                let mm = value[i];
+                let ym = value[i];
 
-                for (;date.getFullYear() < mm["year"] || date.getMonth() < mm["month"]-1;) {
-                    let monName = MONTHS[mm["month"] - 1] + " " + mm["year"];
+                for (;date.getFullYear() < ym["year"] || date.getMonth() < ym["month"]-1;) {
+                    let monName = MONTHS[date["month"] -1] + " " + date["year"];
                     data[monName] = 0;
                     date.setMonth(date.getMonth()+1)
                 }
 
-                let monName = MONTHS[mm["month"] - 1] + " " + mm["year"];
-                data[monName] = mm['cnt'];
+                    let monName = MONTHS[ym["month"] - 1] + " " + ym["year"];
+                    data[monName] = ym['cnt'];
             }
 
             // console.log(data);

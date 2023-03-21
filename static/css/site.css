@@ -11,9 +11,9 @@ span.dashboard.glyphicon-search {
 .member-card {
     background-color: #ffffff;
     color:  black;
-    border: 2px solid black;
-    padding: 15px;
-    margin: 15px;
+    /*border: 2px solid #C0FF02;*/
+    padding: 10px;
+    margin: 10px;
     height: auto;
     width: 190px;
     border-radius: 10px;
@@ -23,8 +23,9 @@ span.dashboard.glyphicon-search {
 }
 
 .selected {
-    background-color: #ADD8E6;
-    color: white;
+    border: 4px solid #C0FF02;
+    /*background-color: rgba(173, 216, 230, 0.37);*/
+    color: #24282a;
 }
 
 .not-found{
