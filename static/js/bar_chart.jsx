@@ -67,7 +67,7 @@ function BarChart(props) {
                         },
                         y: {
                             min: 0,
-                            max: 50,
+                            max: 300,
                             ticks: {
                                 stepSize: 5,
                             },

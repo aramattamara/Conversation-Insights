@@ -11,6 +11,9 @@ def get_members():
     """Return all users."""
     return Member.query.all()
 
+def total_members():
+    return Member.query.all().count()
+
 
 def search_members(search_value) -> List[Member]:
     """Checks if member exists in DB. If so returns instantiated Member (User) object.
@@ -35,6 +38,7 @@ def mes_per_day_per_user() -> List[Row]:
 
     result = query.all()
     return result
+
 
 #
 # def mes_per_month_per_user() -> List[Row]:

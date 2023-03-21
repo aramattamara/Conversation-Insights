@@ -59,15 +59,24 @@ function ChartMesPerMonth(props) {
         }
 
         let datasets = [];
+
         for (let [memberId, value] of stats) {
             if (!memberById[memberId]) {
                 continue;
             }
 
+            const date = new Date(value[0]["year"], value[0]["month"]-1, 1)
             // E.g. {'January': 123}
             let data = {};
             for (let i in value) {
                 let mm = value[i];
+
+                for (;date.getFullYear() < mm["year"] || date.getMonth() < mm["month"]-1;) {
+                    let monName = MONTHS[mm["month"] - 1] + " " + mm["year"];
+                    data[monName] = 0;
+                    date.setMonth(date.getMonth()+1)
+                }
+
                 let monName = MONTHS[mm["month"] - 1] + " " + mm["year"];
                 data[monName] = mm['cnt'];
             }
@@ -122,7 +131,7 @@ function ChartMesPerMonth(props) {
                     },
                     y: {
                         suggestedMin: 0,
-                        suggestedMax: 100,
+                        suggestedMax: 30,
                     }
                 },
             },

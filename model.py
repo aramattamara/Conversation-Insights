@@ -46,6 +46,9 @@ class Member(db.Model, SerializerMixin):
         d['total'] = total
         return d
 
+    def total_members(self):
+        return Member.query.all().count()
+
 # class Chat(db.Model):
 #     """A chat."""
 #
