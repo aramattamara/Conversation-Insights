@@ -35,19 +35,8 @@ function MemberCollection() {
         setSelectedMemberIds(newSelectedMemberIds);
     }
 
-    function handleSortTotalMaxMin(MemberCards) {
-        const sortedMemberCard = [...MemberCards].sort((a, b) => {
-            return a.total - b.total;
-        })
-        setMembers(sortedMemberCard)
-    }
 
-    function handleSortTotalMinMax(MemberCards) {
-        const sortedMemberCard = [...MemberCards].sort((a, b) => {
-            return b.total - a.total;
-        })
-        setMembers(sortedMemberCard)
-    }
+
 
     const MemberCards = [];
     for (const member of members) {
@@ -64,7 +53,7 @@ function MemberCollection() {
         );
     }
 
-    if (MemberCards.length === 0){
+    if (MemberCards.length === 0) {
         MemberCards.push(
             <div key='0' className="not-found">
                 No members found...
@@ -79,23 +68,39 @@ function MemberCollection() {
         }
     }
 
+    function handleSortTotalMaxMin() {
+        let sortedMemberCard = [...members].sort((a, b) => {
+            return b.total - a.total;
+        })
+        setMembers(sortedMemberCard)
+    }
+
+    function handleSortTotalMinMax() {
+        let sortedMemberCard = [...members].sort((a, b) => {
+            return a.total - b.total;
+        })
+        setMembers(sortedMemberCard)
+    }
+
     return (
         <React.Fragment>
             <div className="row">
                 <div className="col-lg-6" id="members">
                     <SearchMembers setMembers={setMembers}/>
                     <br/>
-                    <button onClick={handleSortTotalMaxMin} id="sort-max-min">Total: Max to Min</button>
-                    <button onClick={handleSortTotalMinMax} id="sort-min-max">Total: Min to Max</button>
+                    <div className="sort">
+                        <button onClick={handleSortTotalMaxMin} id="sort-max-min">Total: Max to Min</button>
+                        <button onClick={handleSortTotalMinMax} id="sort-min-max">Total: Min to Max</button>
+                    </div>
                     <br/>
                     <div className="cards-list">
                         {MemberCards}
                     </div>
                 </div>
                 <div className="col-lg-6">
-                    <h2 className="text-center"> Data Vizualization  </h2>
+                    <h2 className="text-center"> Data Vizualization </h2>
                     <BarChart selectedMembers={selectedMembers}/>
-                    <ChartMesPerMonth selectedMembers={selectedMembers} />
+                    <ChartMesPerMonth selectedMembers={selectedMembers}/>
                 </div>
             </div>
         </React.Fragment>
