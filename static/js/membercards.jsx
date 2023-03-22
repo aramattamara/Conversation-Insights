@@ -35,6 +35,20 @@ function MemberCollection() {
         setSelectedMemberIds(newSelectedMemberIds);
     }
 
+    function handleSortTotalMaxMin(MemberCards) {
+        const sortedMemberCard = [...MemberCards].sort((a, b) => {
+            return a.total - b.total;
+        })
+        setMembers(sortedMemberCard)
+    }
+
+    function handleSortTotalMinMax(MemberCards) {
+        const sortedMemberCard = [...MemberCards].sort((a, b) => {
+            return b.total - a.total;
+        })
+        setMembers(sortedMemberCard)
+    }
+
     const MemberCards = [];
     for (const member of members) {
         MemberCards.push(
@@ -69,7 +83,10 @@ function MemberCollection() {
         <React.Fragment>
             <div className="row">
                 <div className="col-lg-6" id="members">
-                        <SearchMembers setMembers={setMembers}/>
+                    <SearchMembers setMembers={setMembers}/>
+                    <br/>
+                    <button onClick={handleSortTotalMaxMin} id="sort-max-min">Total: Max to Min</button>
+                    <button onClick={handleSortTotalMinMax} id="sort-min-max">Total: Min to Max</button>
                     <br/>
                     <div className="cards-list">
                         {MemberCards}
