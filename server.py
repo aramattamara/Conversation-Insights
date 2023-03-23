@@ -1,17 +1,22 @@
+# System
 import json
+import os
 from typing import List
 
+# Import werkzeug web framework
+from werkzeug.exceptions import abort
+
+# Import Flask web framework
+from flask import Flask, jsonify, render_template, request, flash, redirect, url_for
 # Import web templating language
 from jinja2 import StrictUndefined
 
-# Import Flask web framework
-from flask import Flask, jsonify, render_template, request, flash
-
 # Import crud that handles SQLAlchemy queries
 import crud
-
 # Import model.py table definitions
 from model import connect_to_db, Member
+
+import export
 
 app = Flask(__name__)
 
@@ -22,7 +27,9 @@ app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-ALLOWED_EXTENSIONS = {'json'}
+app.config['UPLOAD_EXTENSIONS'] = ['.json']
+UPLOAD_FOLDER = 'upload'
+# ALLOWED_EXTENSIONS = {'json'}
 
 
 @app.route("/")
@@ -80,15 +87,27 @@ def mes_per_month():
     return jsonify(result_dict)
 
 
-@app.route('/upload')
+@app.route('/upload', methods=['POST'])
 def handle_upload():
+
     if 'file' not in request.files:
         flash('no file uploaded')
         return
-    export_file = request.files['file']
-    my_dict = json.load(export_file.stream)
 
-    json.dump(my_dict, 'sdfsdf.json')
+    uploaded_file = request.files['file']
+    filename = uploaded_file.filename
+
+    if filename != "":
+        file_ext = os.path.splitext(filename)[1]
+        if file_ext not in app.config["UPLOAD_EXTENSIONS"]:
+            abort(400)
+        # uploaded_file.save(uploaded_file.filename)
+
+    my_dict = json.load(uploaded_file.stream)
+
+    export.export_data_json(my_dict)
+
+    # json.dump(my_dict, '.json')
 
     return render_template("dashboard.html", my_dict=my_dict)
 
@@ -101,6 +120,7 @@ if __name__ == "__main__":
     connect_to_db(app)
 
     app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     # Use the DebugToolbar
     # DebugToolbarExtension(app)

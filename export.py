@@ -11,10 +11,12 @@ import server
 from flask import Flask
 
 
-
-def export_data_json():
-    with open("result.json") as f:
-        export_data = json.loads(f.read())
+def export_data_json(upload_json=None):
+    if upload_json is not None:
+        export_data = upload_json
+    else:
+        with open("result.json") as f:
+            export_data = json.loads(f.read())
 
     messages = []
     members = []
@@ -41,11 +43,14 @@ def export_data_json():
 
         member_id = message["from_id"][4:]
 
-        member = Member(member_id=member_id,
-                        member_name=message.get("username", member_id),
-                        first_name= first_name,
-                        last_name=last_name,
-                        )
+        if Member.query.get(member_id) is None:
+            member = Member(member_id=member_id,
+                            member_name=message.get("username", member_id),
+                            first_name=first_name,
+                            last_name=last_name,
+                            )
+        else:
+            member = Member.query.get(member_id)
 
         if member_id not in seen_member_ids:
             members.append(member)

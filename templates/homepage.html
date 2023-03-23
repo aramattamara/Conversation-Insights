@@ -2,12 +2,16 @@
 <title>{% block title %}Conversation Insights{% endblock %}</title>
 
 {% block content %}
-    <h1>Welcome!</h1>
-    <h2>Get analytics</h2>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file"/>
-        <input type="submit"/>
-    </form>
+    <div id="welcome-section">
+        <h1>Welcome!</h1>
+        <h2>Get analytics</h2>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file"/>
+            <br>
+            <input type="submit"/>
+        </form>
+    </div>
+
 {% endblock %}
 
 

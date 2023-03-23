@@ -64,4 +64,12 @@ button{
     color: #555555;
 }
 
-
+#welcome-section{
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    flex: 1;
+    margin: 10px auto;
+    text-align: center;
+    color: #555555;
+}
