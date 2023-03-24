@@ -63,6 +63,13 @@ Search: This feature helps navigate throught all members of chat and easy find t
 * Offer Project SLack using
 * Schedule email notification.
 
+##<a name="installation"></a>Installation Instructions
+* Create and activate a virtual environment inside your project directory:
+```
+$ virtualenv env
+$ source env/bin/activate
+```
+
 ## <a name="author"></a>About the Author
 
 Tamara graduated.
