@@ -54,8 +54,6 @@ Search: This feature helps navigate throught all members of chat and easy find t
 ## <a name="design"></a>Design
 
 * Design elements implemented using [Bootstrap](http://getbootstrap.com/), HTML5 and CSS3.
-* All logo design done by the [author](https://www.linkedin.com/in/khardsonhurley) using Adobe Illustrator.
-* Photograph taken by author.
 * Bold typeface chosen for article titles to draw attention to strong headlines.
 * Serif typeface for article body chosen to mimic the look of a physical newspaper.
 * Use of various shades of white to create a clean and crisp look and maintain focus on learning while reading.
