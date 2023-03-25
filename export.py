@@ -1,8 +1,8 @@
-
 import os
 import json
 from random import choice, randint
 from datetime import datetime
+import re
 
 import model
 from model import Message, Member, connect_to_db, db
@@ -41,16 +41,17 @@ def export_data_json(upload_json=None):
             else:
                 last_name = ""
 
-        member_id = message["from_id"][4:]
+        member_id = re.search(r'\d+', message["from_id"])[0]
 
-        if Member.query.get(member_id) is None:
+        db_member = Member.query.get(member_id)
+        if db_member is None:
             member = Member(member_id=member_id,
                             member_name=message.get("username", member_id),
                             first_name=first_name,
                             last_name=last_name,
                             )
         else:
-            member = Member.query.get(member_id)
+            member = db_member
 
         if member_id not in seen_member_ids:
             members.append(member)
@@ -60,9 +61,8 @@ def export_data_json(upload_json=None):
         for obj in message["text_entities"]:
             content.append(obj["text"])
 
-
         message = Message(message_id=message["id"],
-                          member_id=message["from_id"][4:],
+                          member_id=member_id,
                           date=message["date_unixtime"],
                           content=content
                           )
@@ -84,7 +84,7 @@ def export_data_json(upload_json=None):
 
 if __name__ == '__main__':
     model.connect_to_db(server.app)
-    #model.db.create_all()
+    # model.db.create_all()
 
     app = Flask(__name__)
     connect_to_db(app)
