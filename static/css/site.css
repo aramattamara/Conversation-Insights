@@ -10,7 +10,7 @@ span.dashboard.glyphicon-search {
 
 .member-card {
     background-color: #ffffff;
-    color:  black;
+    color: black;
     /*border: 2px solid #C0FF02;*/
     padding: 10px;
     margin: 10px;
@@ -28,7 +28,7 @@ span.dashboard.glyphicon-search {
     color: #24282a;
 }
 
-.not-found{
+.not-found {
     padding: 15px;
     margin: 15px;
     height: auto;
@@ -36,8 +36,8 @@ span.dashboard.glyphicon-search {
     text-align: center;
 }
 
-button{
-    border-radius: 5px ;
+button {
+    border-radius: 5px;
     margin: 10px;
 }
 
@@ -48,6 +48,11 @@ button{
 /*    border: 4px solid #9C1A1C;*/
 /*}*/
 
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 #main-wrapper {
     display: flex;
     flex-direction: column;
@@ -56,15 +61,25 @@ button{
 
 #content {
     flex: 1;
+    min-height: calc(100% - 50px);
+    margin-bottom: -50px;
 }
+
 
 #footer {
-    margin: 10px auto;
+    padding-top: 15px;
     text-align: center;
+    background-color: #f7f7f8;
     color: #555555;
+    position: fixed;
+    display: block;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 
-#welcome-section{
+
+#welcome-section {
     display: flex;
     flex-direction: column;
     min-height: 100%;
