@@ -46,10 +46,10 @@ function BarChart(props) {
                             mode: 'index',
                             intersect: false
                         },
-                        title: {
-                            display: true,
-                            text: 'Total'
-                        },
+                        // title: {
+                        //     display: true,
+                        //     // text: 'Total'
+                        // },
                         colorschemes: {
                             scheme: 'brewer.Paired12'
                         },
@@ -67,9 +67,9 @@ function BarChart(props) {
                         },
                         y: {
                             min: 0,
-                            max: 300,
+                            // max: 3000 ,
                             ticks: {
-                                stepSize: 5,
+                                stepSize: 25,
                             },
                         },
                     },

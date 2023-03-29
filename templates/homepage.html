@@ -2,21 +2,154 @@
 <title>{% block title %}Conversation Insights{% endblock %}</title>
 
 {% block content %}
-    <div id="welcome-section">
-        <h1>Welcome!</h1>
-        <h2>Why scroll when you can see the big picture?</h2>
-        <h2>Get analytics</h2>
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-            <input type="file" name="file"/>
-            <br>
-            <input type="submit"/>
-        </form>
+    <!-- App Features Section -->
+    <div id="features" class="section pt-0">
+        <div class="container">
+            <div class="section-heading centre">
+                <h2 class="heading">Why scroll when you can see the big picture?</h2>
+                <h2 class="heading text-dark-gray">The better way to listen, learn and engage with your team</h2>
+
+            </div>
+            <!-- .section-heading -->
+            <div class="row">
+                <div class="col-4 ui-icon-block">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chart-line" width="52"
+                             height="52" viewBox="0 0 24 24" stroke-width="1.5" stroke="#6f32be" fill="none"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <line x1="4" y1="19" x2="20" y2="19"/>
+                            <polyline points="4 15 8 9 12 11 16 6 20 10"/>
+                        </svg>
+                    </div>
+
+                    <h5 class="text-dark-gray">Datailed Analytics</h5>
+                    <p>
+                        Detailed analytics is a feature that tracks and analyzes data to gain insights into business
+                        operations and performance. It helps optimize processes, increase efficiency, and improve
+                        performance.
+                    </p>
+                </div>
+                <div class="col-4 ui-icon-block">
+                    <div class="icon icon-lg icon-circle icon-graph text-red">
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rocket" width="52"
+                         height="52" viewBox="0 0 24 24" stroke-width="1.5" stroke="#6f32be" fill="none"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3"/>
+                        <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3"/>
+                        <circle cx="15" cy="9" r="1"/>
+                    </svg>
+                    <h5 class="text-dark-gray">Communication Patterns</h5>
+                    <p>
+                        Communication patterns analyze how people interact and exchange information. It can help
+                        identify communication breakdowns and opportunities for collaboration within an organization.
+                    </p>
+                </div>
+                <div class="col-4 ui-icon-block">
+                    <div class="icon icon-lg icon-circle icon-graph text-red">
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="52"
+                         height="52" viewBox="0 0 24 24" stroke-width="1.5" stroke="#6f32be" fill="none"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10"/>
+                        <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"/>
+                    </svg>
+                    <h5 class="text-dark-gray">Data Analysis Only</h5>
+                    <p>
+                        Data analysis only is a feature that allows users to analyze data within a Telegram messaging
+                        app without displaying the messages themselves. It enables users to perform data analysis and
+                        gain insights while protecting privacy and maintaining confidentiality.
+                    </p>
+                </div>
+            </div>
+
+        </div>
     </div>
 
 
-    <div id="footer">
-        Designed and developed by <a class="mainpage-links" href="https://github.com/aramattamara">Tamara Vashchuk</a>. Built at <a class="mainpage-links" href="https://hackbrightacademy.com/">Hackbright Academy</a>.
-        <br />
+    <!-- .welcome-section -->
+    <div id="welcome-section">
+        <h2>Get analytics</h2>
+
+    </div>
+
+
+    <!-- .set-up section -->
+    <div class="row">
+
+        <!-- historical-data-section -->
+        <div class="col-6">
+
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-history" width="52" height="52"
+                 viewBox="0 0 24 24" stroke-width="1.5" stroke="#6f32be" fill="none" stroke-linecap="round"
+                 stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <polyline points="12 8 12 12 14 14"/>
+                <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"/>
+            </svg>
+            <h4> start with uploading historical data</h4>
+            <div class="setup">
+                <h3 class="setup-steps"> Open the Telegram app after installation and log in to your Telegram account
+                    using the
+                    one-time code
+                    sent to the Telegram app on your mobile. </h3>
+                <h3 class="setup-steps"></h3>
+
+            </div>
+
+            <div>
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file"/>
+                    <br>
+                    <input type="submit"/>
+                </form>
+            </div>
+
+        </div>
+        <!-- only-new-data - section -->
+        <div class="col-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar" width="52" height="52"
+                 viewBox="0 0 24 24" stroke-width="1.5" stroke="#6f32be" fill="none" stroke-linecap="round"
+                 stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <rect x="4" y="5" width="16" height="16" rx="2"/>
+                <line x1="16" y1="3" x2="16" y2="7"/>
+                <line x1="8" y1="3" x2="8" y2="7"/>
+                <line x1="4" y1="11" x2="20" y2="11"/>
+                <line x1="11" y1="15" x2="12" y2="15"/>
+                <line x1="12" y1="15" x2="12" y2="18"/>
+            </svg>
+
+
+            <div class="dashboard-section">
+                <h2> Analyze only new data</h2>
+                <h2> Add telegram bot to your chat to get updates and create data analytics</h2>
+                <button class="btn btn-primary" type="submit" id="submit-profile">Go to dashboard</button>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- .fotter-->
+    <div class="footer">
+        Designed and developed by <a class="mainpage-links" href="https://github.com/aramattamara">Tamara Vashchuk</a>.
+        Built at <a class="mainpage-links" href="https://hackbrightacademy.com/">Hackbright Academy</a>.
+        <br/>
         <p>2023 Conversation Insights. All Rights Reserved.</p>
     </div>
 

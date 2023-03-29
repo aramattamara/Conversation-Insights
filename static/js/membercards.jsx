@@ -7,7 +7,7 @@ function MemberCard(props) {
     // };
 
     return (
-        <div className={`card member-card ${props.selected ? 'selected' : ''}`}
+        <div className={`member-card ${props.selected ? 'selected' : ''}`}
              onClick={props.toggleSelected}>
             <p>{props.fname} {props.lname}</p>
             <p>Username: @{props.member_name}</p>
