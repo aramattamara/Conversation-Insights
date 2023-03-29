@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+<title>{% block title %}Conversation Insights{% endblock %}</title>
+
+{% block content %}
+    <!-- historical-data-section -->
+
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-history" width="52" height="52"
+             viewBox="0 0 24 24" stroke-width="1.5" stroke="#6f32be" fill="none" stroke-linecap="round"
+             stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <polyline points="12 8 12 12 14 14"/>
+            <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"/>
+        </svg>
+        <h4>Analyze historical data</h4>
+        <h3>How to upload chat history</h3>
+
+
+        <div class="setup">
+            <input type="checkbox" id="setup1" name="setup1" value="Open">
+            <label for="setup1"> Launch the Telegram app on your desktop and open the channel for which you want to
+                export chat.</label><br>
+            <input type="checkbox" id="setup2" name="setup2" value="Car">
+            <label for="setup2"> Now click on the three-dot icon at the top-right of the screen. From the various
+                options available, click on the Export chat history.</label><br>
+            <img src="static/img/select-contact-and-export-chat-history.png"
+                 alt="select-contact-and-export-chat-history" width="200" height=auto><br>
+            <input type="checkbox" id="setup3" name="setup3" value="Boat">
+            <label for="setup3"> Right after clicking, a Chat export settings window will pop-up. Here you can
+                select various files like photos or videos that you want to export along with your chats. We don't
+                need any photos or videos, so br sure that you unselect all of them.
+                Selecting the path of download is also possible along with the dates, the data between which you
+                want to download.</label><br>
+            <img src="static/img/json-format.png" alt="json-format" width="200" height=auto><br>
+            <input type="checkbox" id="setup4" name="setup4" value="Boat">
+            <label for="setup4"> Right after clicking, a Chat export settings window will pop-up. Here you can
+                select various files like photos or videos that you want to export along with your chats. We don't
+                need any photos or videos, so br sure that you unselect all of them.
+                Selecting the path of download is also possible along with the dates, the data between which you
+                want to download.</label><br>
+            <img src="static/img/export-data.png" alt="json-format" width="200" height=auto><br>
+        </div>
+
+        <div>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file"/>
+                <br>
+                <input type="submit"/>
+            </form>
+        </div>
+
+
+{% endblock %}

@@ -85,7 +85,7 @@ function MemberCollection() {
     return (
         <React.Fragment>
             <div className="row">
-                <div className="col-lg-6" id="members">
+                <div className="col-6" id="members">
                     <SearchMembers setMembers={setMembers}/>
                     <br/>
                     <div className="sort">
@@ -97,7 +97,7 @@ function MemberCollection() {
                         {MemberCards}
                     </div>
                 </div>
-                <div className="col-lg-6">
+                <div className="col-6">
                     <h2 className="text-center"> Data Vizualization </h2>
                     <BarChart selectedMembers={selectedMembers}/>
                     <ChartMesPerMonth selectedMembers={selectedMembers}/>

@@ -13,10 +13,10 @@ html, body {
     transform: scale(1.1, 1.1);
 }
 
-/*.cards-list {*/
-/*    !*border: 1px gray solid;*!*/
-/*    border-radius: 10px;*/
-/*}*/
+.cards-list {
+    border: 1px gray solid;
+    border-radius: 10px;
+}
 
 .member-card {
     /*background-color: #ffffff;*/
@@ -54,7 +54,6 @@ html, body {
 button {
     border-radius: 5px;
     margin: 10px;
-    background-color: ;
 }
 
 button:hover {
@@ -74,18 +73,18 @@ button:hover {
     margin-bottom: -50px;
 }
 
-
-.footer {
-    padding-top: 15px;
+/*homepage style*/
+.features-section {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    flex: 1;
+    margin: 20px auto;
     text-align: center;
-    position: fixed;
-    display: block;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    color: #555555;
 }
 
-#welcome-section {
+.welcome-section {
     display: flex;
     flex-direction: column;
     min-height: 100%;
@@ -93,6 +92,16 @@ button:hover {
     margin: 10px auto;
     text-align: center;
     color: #555555;
+}
+
+.footer-section {
+    padding-top: 15px;
+    text-align: center;
+    position: fixed;
+    display: block;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 .dashboard-section {
@@ -105,22 +114,12 @@ button:hover {
     color: #555555;
 }
 
-#features {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-    flex: 1;
-    margin: 20px auto;
-    text-align: center;
-    color: #555555;
-}
+
 
 .row {
-    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    margin-right: -1rem;
-    margin-left: -1rem;
+    margin: 50px -1rem;
 }
 
 .text-dark-gray {

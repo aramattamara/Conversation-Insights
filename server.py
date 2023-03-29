@@ -43,6 +43,16 @@ def dashboard():
     return render_template("dashboard.html")
 
 
+@app.route("/start_historical")
+def start():
+    return render_template("start_historical.html")
+
+
+@app.route("/start_only_new")
+def start_new():
+    return render_template("start_only_new.html")
+
+
 
 
 # ####################### DASHBOARD (SHOWA ALL MEMBERS) ###############
