@@ -50,7 +50,6 @@ User behavior insights: This feature shows who is the most active member of the 
 
 Search: This feature helps navigate throught all members of chat and easy find them.
 
-
 ## <a name="design"></a>Design
 
 * Design elements implemented using [Bootstrap](http://getbootstrap.com/), HTML5 and CSS3.
@@ -64,7 +63,9 @@ Search: This feature helps navigate throught all members of chat and easy find t
 * Schedule email notification.
 
 ## <a name="installation"></a>Installation Instructions
+
 * Create and activate a virtual environment inside your project directory:
+
 ```
 $ virtualenv env
 $ source env/bin/activate
@@ -72,11 +73,5 @@ $ source env/bin/activate
 
 ## <a name="author"></a>About the Author
 
-Tamara graduated.
-Prior to Hackbright, she was a business manager at Sinopharmtech, while she pursued a
-Masters Degree focused on Math and Technology Education.
-After teaching for six years, Krishelle discovered her passion for designing tools that make processes more efficient.
-She realized that software engineering would be the perfect opportunity to combine this passion with her love for
-problem solving. Krishelle's love for learning and making an impact run strong, and she is excited to contribute her
-creativity to a full-stack software development role. Learn more about
-Tamara [here](https://www.linkedin.com/in/tamara-vashchuk/). 
+Tamara is a software engineer originally from Ukraine, and currently living in CA. This is her first full stack
+project. Visit her [LinkedIn](https://www.linkedin.com/in/tamara-vashchuk/)
