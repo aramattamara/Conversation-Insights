@@ -5,11 +5,17 @@ from typing import List
 from sqlalchemy import func, extract, Date, Integer
 from model import db, Message, Member, Chat, connect_to_db
 from sqlalchemy.engine.row import Row
+from sqlalchemy.orm import joinedload
 
 
-def get_members():
-    """Return all users."""
-    return Member.query.all()
+def get_members(chat_id: int):
+    """Return all users where chat_id eql selected chat_id."""
+    return Member.query. \
+        join(Message, Member.member_id == Message.member_id). \
+        options(joinedload(Member.messages)). \
+        filter(Message.chat_id == chat_id). \
+        group_by(Member.member_id). \
+        all()
 
 
 def total_members():

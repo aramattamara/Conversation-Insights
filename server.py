@@ -59,7 +59,12 @@ def start_new():
 # ####################### DASHBOARD (SHOWA ALL MEMBERS) ###############
 @app.route("/api/get_members.json")
 def get_members_json():
-    members: List[Member] = crud.get_members()
+    if 'chat_id' not in request.args:
+        return "No chat_id query param", 400
+    chat_id = request.args['chat_id']
+    chat_id = int(chat_id)
+
+    members: List[Member] = crud.get_members(chat_id)
     result_json = []
     for member in members:
         members_d = member.to_dict_with_count()

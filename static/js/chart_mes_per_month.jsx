@@ -49,7 +49,7 @@ function ChartMesPerMonth(props) {
 
         // E.g. {388268832: [{'cnt': 5, 'year': 2023, 'month': 3}]}
         const stats = new Map(Object.entries(memberMonthCounts));
-        console.log('start');
+        // console.log('start');
 
         const selectedStats = {};
         for (let [memberId, value] of stats) {
@@ -87,7 +87,7 @@ function ChartMesPerMonth(props) {
                 data: data
             });
         }
-        console.log(datasets);
+        // console.log(datasets);
 
         // datasets = [{
         //     label: "Member 123",

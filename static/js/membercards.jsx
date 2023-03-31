@@ -17,13 +17,20 @@ function MemberCard(props) {
 }
 
 function MemberCollection(props) {
-    props['chat_id']
+
     const [members, setMembers] = React.useState([]);
     const [selectedMemberIds, setSelectedMemberIds] = React.useState({});
 
     React.useEffect(() => {
         fetch('/api/get_members.json?chat_id=' + props.chat_id)
-            .then((response) => response.json())
+            .then((response) => {
+                console.log('Response ', response);
+                if (response.status !== 200) {
+                    console.log('Failed to get_members.json', response);
+                    return [];
+                }
+                return response.json();
+            })
             .then((result) => {
                 setMembers(result)
             });
@@ -107,5 +114,5 @@ function MemberCollection(props) {
     );
 }
 
-const chat_id = document.getElementById("chat_id")
+const chat_id = document.getElementById("chat_id").value;
 ReactDOM.render(<MemberCollection chat_id={chat_id}/>, document.getElementById('container'));
