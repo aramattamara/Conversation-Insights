@@ -3,7 +3,6 @@ from typing import Dict
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
-from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -14,9 +13,9 @@ class Message(db.Model):
     __tablename__ = "messages"
 
     message_id = db.Column(db.Integer, nullable=False, primary_key=True)
+    chat_id = db.Column(db.BigInteger, db.ForeignKey("chats.chat_id"), primary_key=True)
     update_id = db.Column(db.Integer, nullable=True)
     member_id = db.Column(db.BigInteger, db.ForeignKey("members.member_id"))
-    chat_id = db.Column(db.BigInteger, db.ForeignKey("chats.chat_id"))
     date = db.Column(db.Integer, nullable=False)
     content = db.Column(db.String, nullable=True, default="Unknown")
 
@@ -45,9 +44,6 @@ class Member(db.Model, SerializerMixin):
         total = Message.query.filter_by(member_id=self.member_id).count()
         d['total'] = total
         return d
-
-    def total_members(self):
-        return Member.query.all().count()
 
 
 class Chat(db.Model):
