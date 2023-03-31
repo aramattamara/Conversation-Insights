@@ -95,7 +95,7 @@ def pull_new_updates():
 #     get_text()
 #     sleep(30)
 
-
-app = Flask(__name__)
-connect_to_db(app)
-pull_new_updates()
+if __name__ == '__main__':
+    app = Flask(__name__)
+    connect_to_db(app)
+    pull_new_updates()

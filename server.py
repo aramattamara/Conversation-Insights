@@ -1,22 +1,23 @@
 # System
 import json
 import os
+import time
+from threading import Thread
 from typing import List
-
-# Import werkzeug web framework
-from werkzeug.exceptions import abort
 
 # Import Flask web framework
 from flask import Flask, jsonify, render_template, request, flash, redirect
 # Import web templating language
 from jinja2 import StrictUndefined
+# Import werkzeug web framework
+from werkzeug.exceptions import abort
 
+import api_calls
 # Import crud that handles SQLAlchemy queries
 import crud
+import export
 # Import model.py table definitions
 from model import connect_to_db, Member
-
-import export
 
 app = Flask(__name__)
 
@@ -30,6 +31,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_EXTENSIONS'] = ['.json']
 UPLOAD_FOLDER = 'upload'
 # ALLOWED_EXTENSIONS = {'json'}
+
+UPDATE_EVERY_SEC = int(os.environ.get('UPDATE_EVERY_SEC', '60'))
 
 
 @app.route("/")
@@ -52,8 +55,6 @@ def start():
 def start_new():
     chats = crud.all_chats()
     return render_template("start_only_new.html", chats=chats)
-
-
 
 
 # ####################### DASHBOARD (SHOWA ALL MEMBERS) ###############
@@ -112,7 +113,6 @@ def mes_per_month():
 
 @app.route('/upload', methods=['POST'])
 def handle_upload():
-
     if 'file' not in request.files:
         flash('no file uploaded')
         return
@@ -137,17 +137,28 @@ def handle_upload():
     return redirect(f'/dashboard/{chat_id}')
 
 
+def pull_updates_cron():
+    print(f'Watching for updates, pull every {UPDATE_EVERY_SEC}s...')
+    while t:
+        api_calls.pull_new_updates()
+        time.sleep(UPDATE_EVERY_SEC)
+
+
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
-    app.debug = True
 
-    connect_to_db(app)
+    app.debug = False
+
+    connect_to_db(app, echo=False)
 
     app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     # Use the DebugToolbar
     # DebugToolbarExtension(app)
+
+    t = Thread(name="updates-watcher", target=pull_updates_cron, daemon=True)
+    t.start()
 
     app.run(host='0.0.0.0')
