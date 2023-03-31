@@ -1,11 +1,9 @@
 """CRUD operations. """
-from datetime import datetime
 from typing import List
 
 from sqlalchemy import func, extract, Date, Integer
 from model import db, Message, Member, Chat, connect_to_db
 from sqlalchemy.engine.row import Row
-from sqlalchemy.orm import joinedload
 
 
 def get_members(chat_id: int):
@@ -43,9 +41,9 @@ def search_members(search_value: str, chat_id: int) -> List[Member]:
         .all()
 
 
-def get_msg() -> List[Message]:
-    """Return all users."""
-    return Message.query.all()
+# def get_msg() -> List[Message]:
+#     """Return all users."""
+#     return Message.query.all()
 
 
 def mes_per_day_per_user() -> List[Row]:

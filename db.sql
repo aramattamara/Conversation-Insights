@@ -34,3 +34,5 @@ INNER JOIN messages m ON members.member_id = m.member_id
 WHERE m.chat_id = 1420590782
 GROUP BY members.member_id
 ;
+
+SELECT COUNT(*) FROM members;
