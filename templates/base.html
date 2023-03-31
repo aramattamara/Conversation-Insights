@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- My CSS file -->
-    <link rel="stylesheet" href="static/css/site.css">
+    <link rel="stylesheet" href="/static/css/site.css">
 
     <!-- IMPORT AJAX FILES -->
     <script src="/static/js/utils.js" type="text/jsx" defer></script>
@@ -54,12 +54,16 @@
 
 </head>
 <body>
-<div id="main-wrapper">
-    <div id="content">
-<!-- CONTENT -->
-{% block content %}
-    CONTENT GOES HERE
-{% endblock %}
+<header>
+
+</header>
+<main>
+    <!-- CONTENT -->
+    {% block content %}
+        CONTENT GOES HERE
+    {% endblock %}
+</main>
+
 
 </body>
 </html>

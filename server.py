@@ -38,9 +38,9 @@ def homepage():
     return render_template("homepage.html")
 
 
-@app.route("/dashboard")
-def dashboard():
-    return render_template("dashboard.html")
+@app.route("/dashboard/<chat_id>")
+def dashboard(chat_id):
+    return render_template("dashboard.html", chat_id=chat_id)
 
 
 @app.route("/start_historical")
@@ -50,7 +50,8 @@ def start():
 
 @app.route("/start_only_new")
 def start_new():
-    return render_template("start_only_new.html")
+    chats = crud.all_chats()
+    return render_template("start_only_new.html", chats=chats)
 
 
 

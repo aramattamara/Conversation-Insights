@@ -3,8 +3,23 @@
 
 {% block content %}
     <div>
-        <h2> Add telegram bot to your chat to get updates and create data analytics</h2>
-        <button class="btn btn-primary" type="submit" id="submit-profile">Go to dashboard</button>
+        <h2>If you don't see your channel here</h2>
+        <ul class="chat-list">
+            {% for chat in chats %}
+                <li>
+                    <a href="/dashboard/{{ chat.chat_id }}" class="chat">
+                        <h3> {{ chat.title }}</h3>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <a href="/dashboard">
+            <button class="btn btn-primary" type="submit" id="submit-profile">Go to dashboard</button>
+        </a>
+
+        <h2>Add this bot to the channel and refresh page</h2>
+
 
     </div>
 

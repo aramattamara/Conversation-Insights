@@ -16,7 +16,7 @@ class Message(db.Model):
     message_id = db.Column(db.Integer, nullable=False, primary_key=True)
     update_id = db.Column(db.Integer, nullable=True)
     member_id = db.Column(db.BigInteger, db.ForeignKey("members.member_id"))
-    # chat_id = db.Column(db.Integer, db.ForeignKey("chats.chat_id"))
+    chat_id = db.Column(db.Integer, db.ForeignKey("chats.chat_id"))
     date = db.Column(db.Integer, nullable=False)
     content = db.Column(db.String, nullable=True, default="Unknown")
 
@@ -49,15 +49,16 @@ class Member(db.Model, SerializerMixin):
     def total_members(self):
         return Member.query.all().count()
 
-# class Chat(db.Model):
-#     """A chat."""
-#
-#     __tablename__ = "chats"
-#     chat_id = db.Column(db.BigInteger, nullable=False, primary_key=True,)
-#    # title = db.Column(db.String)
-#
-#     def __repr__(self):
-#         return f"<Chat chat_id{self.chat_id}>"
+
+class Chat(db.Model):
+    """A chat."""
+
+    __tablename__ = "chats"
+    chat_id = db.Column(db.BigInteger, nullable=False, primary_key=True)
+    title = db.Column(db.String)
+
+    def __repr__(self):
+        return f"<Chat chat_id{self.chat_id}>"
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///project", echo=True):

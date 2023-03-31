@@ -71,55 +71,55 @@
     </div>
 
 
-    <!-- .welcome-section -->
-    <div class="welcome-section">
+    <!-- .analytics-section -->
+    <section class="analytics-section">
         <h2>Get analytics</h2>
-        <div class="row">
-            <div class="col-6">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-history" width="52" height="52"
-                     viewBox="0 0 24 24" stroke-width="1.5" stroke="#6f32be" fill="none" stroke-linecap="round"
-                     stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <polyline points="12 8 12 12 14 14"/>
-                    <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"/>
-                </svg>
-                <br>
-                <a href="/start_historical" type="submit" id="start_historical">Analyze historical data</a>
+        <div class="icon-container">
+            <div class="icon">
+                <a href="/start_historical" type="submit" id="start_historical">
+                    <i class="fas fa-chart-line">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-history" width="52"
+                             height="52"
+                             viewBox="0 0 24 24" stroke-width="1.5" stroke="#6f32be" fill="none" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <polyline points="12 8 12 12 14 14"/>
+                            <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"/>
+                        </svg>
+                    </i>
+                    <span>Analyze historical data</span>
+                </a>
             </div>
-            <div class="col-6">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar" width="52" height="52"
-                     viewBox="0 0 24 24" stroke-width="1.5" stroke="#6f32be" fill="none" stroke-linecap="round"
-                     stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <rect x="4" y="5" width="16" height="16" rx="2"/>
-                    <line x1="16" y1="3" x2="16" y2="7"/>
-                    <line x1="8" y1="3" x2="8" y2="7"/>
-                    <line x1="4" y1="11" x2="20" y2="11"/>
-                    <line x1="11" y1="15" x2="12" y2="15"/>
-                    <line x1="12" y1="15" x2="12" y2="18"/>
-                </svg>
-                <br>
-                <a href="/start_only_new" type="submit" id="start_only_new">Analyze only new data</a>
+            <div class="icon">
+                <a href="/start_only_new">
+                    <i class="fas fa-chart-bar">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar" width="52"
+                             height="52"
+                             viewBox="0 0 24 24" stroke-width="1.5" stroke="#6f32be" fill="none" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <rect x="4" y="5" width="16" height="16" rx="2"/>
+                            <line x1="16" y1="3" x2="16" y2="7"/>
+                            <line x1="8" y1="3" x2="8" y2="7"/>
+                            <line x1="4" y1="11" x2="20" y2="11"/>
+                            <line x1="11" y1="15" x2="12" y2="15"/>
+                            <line x1="12" y1="15" x2="12" y2="18"/>
+                        </svg>
+                    </i>
+                    <span>Analyze new data</span>
+                </a>
             </div>
-        </div>
-
-
-
-
-
-
-
-    </div>
+    </section>
 
 
 
     <!-- .fotter-section-->
-        <div class="footer-section">
-            Designed and developed by <a class="mainpage-links" href="https://github.com/aramattamara">Tamara Vashchuk</a>.
-            Built at <a class="mainpage-links" href="https://hackbrightacademy.com/">Hackbright Academy</a>.
-            <br/>
-            <p>2023 Conversation Insights. All Rights Reserved.</p>
-        </div>
+    <footer>
+    Designed and developed by <a class="mainpage-links" href="https://github.com/aramattamara">Tamara Vashchuk</a>.
+    Built at <a class="mainpage-links" href="https://hackbrightacademy.com/">Hackbright Academy</a>.
+    <br/>
+    <p>2023 Conversation Insights. All Rights Reserved.</p>
+    <footer>
 
 {% endblock %}
 

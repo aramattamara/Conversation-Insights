@@ -5,7 +5,7 @@ from datetime import datetime
 import re
 
 import model
-from model import Message, Member, connect_to_db, db
+from model import Message, Member, Chat, connect_to_db, db
 import crud
 import server
 from flask import Flask
@@ -18,15 +18,19 @@ def export_data_json(upload_json=None):
         with open("result.json") as f:
             export_data = json.loads(f.read())
 
+    chat = Chat(chat_id=export_data["id"], title=export_data["name"])
+    db.session.merge(chat)
+
     messages = []
     members = []
-    chat = []
     seen_member_ids = set()
 
     for message in export_data['messages']:
         print(message)
         if message["type"] != "message":
             continue
+
+        member_id = re.search(r'\d+', message["from_id"])[0]
 
         first_name = None
         last_name = None
@@ -40,8 +44,6 @@ def export_data_json(upload_json=None):
                 last_name = names[1]
             else:
                 last_name = ""
-
-        member_id = re.search(r'\d+', message["from_id"])[0]
 
         db_member = Member.query.get(member_id)
         if db_member is None:
@@ -63,21 +65,15 @@ def export_data_json(upload_json=None):
 
         message = Message(message_id=message["id"],
                           member_id=member_id,
+                          chat_id=chat.chat_id,
                           date=message["date_unixtime"],
-                          content=content
+                          content=content,
                           )
         messages.append(message)
 
     db.session.bulk_save_objects(members)
-    # for member in members:
-    #     db.session.merge(member)
-
-    for c in chat:
-        db.session.merge(c)
 
     db.session.bulk_save_objects(messages)
-    # for message in messages:
-    #     db.session.merge(message)
 
     db.session.commit()
 

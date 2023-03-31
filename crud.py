@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import List
 
 from sqlalchemy import func, extract, Date, Integer
-from model import db, Message, Member, connect_to_db
+from model import db, Message, Member, Chat, connect_to_db
 from sqlalchemy.engine.row import Row
 
 
@@ -11,8 +11,13 @@ def get_members():
     """Return all users."""
     return Member.query.all()
 
+
 def total_members():
     return Member.query.all().count()
+
+
+def all_chats():
+    return Chat.query.all()
 
 
 def search_members(search_value) -> List[Member]:
