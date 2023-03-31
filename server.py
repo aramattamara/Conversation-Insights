@@ -68,7 +68,7 @@ def get_members_json():
     members: List[Member] = crud.get_members(chat_id)
     result_json = []
     for member in members:
-        members_d = member.to_dict_with_count()
+        members_d = member.to_dict_with_count(chat_id)
         result_json.append(members_d)
     return jsonify(result_json)
 
@@ -86,7 +86,7 @@ def process_member_search():
 
     result_json = []
     for member in members:
-        result_json.append(member.to_dict_with_count())
+        result_json.append(member.to_dict_with_count(chat_id))
 
     return jsonify(result_json)
 

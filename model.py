@@ -39,9 +39,9 @@ class Member(db.Model, SerializerMixin):
     def __repr__(self):
         return f"<Member member_id={self.member_id}>"
 
-    def to_dict_with_count(self) -> Dict:
+    def to_dict_with_count(self, chat_id: int) -> Dict:
         d = self.to_dict()
-        total = Message.query.filter_by(member_id=self.member_id).count()
+        total = Message.query.filter_by(member_id=self.member_id, chat_id=chat_id).count()
         d['total'] = total
         return d
 
