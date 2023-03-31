@@ -12,7 +12,6 @@ def get_members(chat_id: int):
     """Return all users where chat_id eql selected chat_id."""
     return Member.query. \
         join(Message, Member.member_id == Message.member_id). \
-        options(joinedload(Member.messages)). \
         filter(Message.chat_id == chat_id). \
         group_by(Member.member_id). \
         all()
@@ -26,12 +25,18 @@ def all_chats():
     return Chat.query.all()
 
 
-def search_members(search_value) -> List[Member]:
+def search_members(search_value: str, chat_id: int) -> List[Member]:
     """Checks if member exists in DB. If so returns instantiated Member (User) object.
     Returns none if member not found"""
-    return Member.query.filter((Member.first_name.ilike(f'%{search_value}%')) |
-                               (Member.last_name.ilike(f'%{search_value}%')) |
-                               (Member.member_name.ilike(f'%{search_value}%'))).all()
+    return Member.query\
+        .join(Message, Member.member_id == Message.member_id) \
+        .filter(Message.chat_id == chat_id) \
+        .filter(
+            (Member.first_name.ilike(f'%{search_value}%')) |
+            (Member.last_name.ilike(f'%{search_value}%')) |
+            (Member.member_name.ilike(f'%{search_value}%'))) \
+        .group_by(Member.member_id)\
+        .all()
 
 
 def get_msg() -> List[Message]:

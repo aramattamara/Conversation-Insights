@@ -6,7 +6,7 @@ from flask import Flask
 # Library for API calls
 import requests
 
-from model import Message, Member, connect_to_db, db
+from model import Message, Member, Chat, connect_to_db, db
 
 bot_key = os.environ['API_BOT_KEY']
 
@@ -29,8 +29,9 @@ def example_data():
 
 def save_data(data: Dict):
     messages = []
-    members = []
-    chat = []
+    members = {}
+    chats = {}
+
     for i in data["result"]:
         print(i)
         if "message" not in i:
@@ -46,6 +47,10 @@ def save_data(data: Dict):
         elif "new_chat_participant" in i["message"]:
             continue
 
+        chat_update = i["message"]["chat"]
+        chat = Chat(chat_id=chat_update["id"],
+                    title=chat_update["title"])
+        chats[chat.chat_id] = chat
 
         message_from = i["message"]["from"]
         member = Member(member_id=message_from["id"],
@@ -53,24 +58,22 @@ def save_data(data: Dict):
                         first_name=message_from.get("first_name", None),
                         last_name=message_from.get("last_name", None)
                         )
-        members.append(member)
-
-        # c = Chat(chat_id=i["message"]["chat"]["id"])
-        # chat.append(c)
+        members[member.member_id] = member
 
         message = Message(update_id=i["update_id"],
                           message_id=i["message"]["message_id"],
                           member_id=message_from["id"],
+                          chat_id=chat.chat_id,
                           date=i["message"]["date"],
                           content=content,
                           )
         messages.append(message)
 
     # Users and chats must be saved first, as Message has foreight keys to them
-    for member in members:
+    for member in members.values():
         db.session.merge(member)
 
-    for c in chat:
+    for c in chats.values():
         db.session.merge(c)
 
     for message in messages:

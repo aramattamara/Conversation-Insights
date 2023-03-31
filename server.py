@@ -75,8 +75,13 @@ def get_members_json():
 # ################### DASHBOARD (MEMBER SEARCH) ################### #
 @app.route('/search.json', methods=["GET"])
 def process_member_search():
+    if 'chat_id' not in request.args:
+        return "No chat_id query param", 400
+    chat_id = request.args['chat_id']
+    chat_id = int(chat_id)
+
     member_search = request.args.get("search-text")
-    members = crud.search_members(member_search)
+    members = crud.search_members(member_search, chat_id)
 
     result_json = []
     for member in members:

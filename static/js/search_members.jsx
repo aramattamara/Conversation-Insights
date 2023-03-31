@@ -2,7 +2,8 @@ function SearchMembers(props) {
     const [searchText, setSearchText] = React.useState('');
 
     React.useEffect(() => {
-        fetch('/search.json?search-text=' + encodeURIComponent(searchText))
+        fetch('/search.json?search-text=' + encodeURIComponent(searchText) +
+            '&chat_id=' + props.chatId)
             .then((response) => response.json())
             .then((data) => {
                 props.setMembers(data);

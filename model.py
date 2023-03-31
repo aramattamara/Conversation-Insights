@@ -16,7 +16,7 @@ class Message(db.Model):
     message_id = db.Column(db.Integer, nullable=False, primary_key=True)
     update_id = db.Column(db.Integer, nullable=True)
     member_id = db.Column(db.BigInteger, db.ForeignKey("members.member_id"))
-    chat_id = db.Column(db.Integer, db.ForeignKey("chats.chat_id"))
+    chat_id = db.Column(db.BigInteger, db.ForeignKey("chats.chat_id"))
     date = db.Column(db.Integer, nullable=False)
     content = db.Column(db.String, nullable=True, default="Unknown")
 

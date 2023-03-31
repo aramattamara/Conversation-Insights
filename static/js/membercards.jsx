@@ -21,20 +21,20 @@ function MemberCollection(props) {
     const [members, setMembers] = React.useState([]);
     const [selectedMemberIds, setSelectedMemberIds] = React.useState({});
 
-    React.useEffect(() => {
-        fetch('/api/get_members.json?chat_id=' + props.chat_id)
-            .then((response) => {
-                console.log('Response ', response);
-                if (response.status !== 200) {
-                    console.log('Failed to get_members.json', response);
-                    return [];
-                }
-                return response.json();
-            })
-            .then((result) => {
-                setMembers(result)
-            });
-    }, []);
+    // React.useEffect(() => {
+    //     fetch('/api/get_members.json?chat_id=' + props.chatId)
+    //         .then((response) => {
+    //             console.log('Response ', response);
+    //             if (response.status !== 200) {
+    //                 console.log('Failed to get_members.json', response);
+    //                 return [];
+    //             }
+    //             return response.json();
+    //         })
+    //         .then((result) => {
+    //             setMembers(result)
+    //         });
+    // }, []);
 
     function toggleSetSelected(memberId) {
         let newSelectedMemberIds = {...selectedMemberIds};
@@ -93,7 +93,7 @@ function MemberCollection(props) {
         <React.Fragment>
             <div className="row">
                 <div className="col-6" id="members">
-                    <SearchMembers setMembers={setMembers}/>
+                    <SearchMembers setMembers={setMembers} chatId={props.chatId}/>
                     <br/>
                     <div className="sort">
                         <button onClick={handleSortTotalMaxMin} id="sort-max-min">Total: Max to Min</button>
@@ -114,5 +114,8 @@ function MemberCollection(props) {
     );
 }
 
-const chat_id = document.getElementById("chat_id").value;
-ReactDOM.render(<MemberCollection chat_id={chat_id}/>, document.getElementById('container'));
+let chatIdEl = document.getElementById("chat_id");
+if (chatIdEl) {
+    const chatId = chatIdEl.value;
+    ReactDOM.render(<MemberCollection chatId={chatId}/>, document.getElementById('container'));
+}

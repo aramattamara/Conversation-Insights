@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "result": [
+    {
+      "update_id": 131327802,
+      "message": {
+        "message_id": 91,
+        "from": {
+          "id": 388268832,
+          "is_bot": false,
+          "first_name": "Tamara",
+          "last_name": "Vashchuk",
+          "username": "vashchuktamara",
+          "language_code": "en"
+        },
+        "chat": {
+          "id": -1001665229981,
+          "title": "Bloubergstrand \ud83e\ude81",
+          "type": "supergroup"
+        },
+        "date": 1680246160,
+        "text": "hi"
+      }
+    }
+  ]
+}
+
