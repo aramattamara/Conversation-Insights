@@ -36,3 +36,5 @@ GROUP BY members.member_id
 ;
 
 SELECT COUNT(*) FROM members;
+
+DELETE FROM chats WHERE chat_id < 0

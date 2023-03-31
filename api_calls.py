@@ -13,6 +13,7 @@ bot_key = os.environ['API_BOT_KEY']
 
 def get_updates() -> Dict:
     response = requests.get('https://api.telegram.org/bot' + bot_key + '/getUpdates')
+    print('\n\n')
     print(response.text)
     return response.json()
 
@@ -33,7 +34,7 @@ def save_data(data: Dict):
     chats = {}
 
     for i in data["result"]:
-        print(i)
+        # print(i)
         if "message" not in i:
             continue
 

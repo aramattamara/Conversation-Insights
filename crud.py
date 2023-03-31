@@ -46,13 +46,13 @@ def search_members(search_value: str, chat_id: int) -> List[Member]:
 #     return Message.query.all()
 
 
-def mes_per_day_per_user() -> List[Row]:
+def mes_per_day_per_user(chat_id: int) -> List[Row]:
     """Function returns total counts per day per user"""
-    query = db.session.query(
-        func.count().label('cnt'),
-        func.to_timestamp(Message.date).cast(Date).label('day'),
-        Message.member_id
-    ).group_by('day', 'member_id')
+    query = db.session\
+        .join(Message, Member.member_id == Message.member_id) \
+        .filter(Message.chat_id == chat_id)\
+        .query(func.count().label('cnt'), func.to_timestamp(Message.date).cast(Date).label('day'),Message.member_id)\
+        .group_by('day', 'member_id')
 
     result = query.all()
     return result
