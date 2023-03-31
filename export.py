@@ -1,12 +1,9 @@
-import os
 import json
-from random import choice, randint
-from datetime import datetime
 import re
+from typing import List, Tuple, Set
 
 import model
 from model import Message, Member, Chat, connect_to_db, db
-import crud
 import server
 from flask import Flask
 
@@ -21,8 +18,8 @@ def export_data_json(upload_json=None):
     chat = Chat(chat_id=export_data["id"], title=export_data["name"])
     db.session.merge(chat)
 
-    messages = []
-    members = []
+    messages: List[Message] = []
+    members: List[Member] = []
     seen_member_ids = set()
 
     for message in export_data['messages']:
@@ -45,15 +42,15 @@ def export_data_json(upload_json=None):
             else:
                 last_name = ""
 
-        db_member = Member.query.get(member_id)
-        if db_member is None:
-            member = Member(member_id=member_id,
-                            member_name=message.get("username", member_id),
-                            first_name=first_name,
-                            last_name=last_name,
-                            )
-        else:
-            member = db_member
+        # db_member = Member.query.get(member_id)
+        # if db_member is None:
+        member = Member(member_id=member_id,
+                        member_name=message.get("username", member_id),
+                        first_name=first_name,
+                        last_name=last_name,
+                        )
+        # else:
+        #     member = db_member
 
         if member_id not in seen_member_ids:
             members.append(member)
@@ -71,9 +68,31 @@ def export_data_json(upload_json=None):
                           )
         messages.append(message)
 
-    db.session.bulk_save_objects(members)
+    # Filter out members that are already in DB
+    member_ids = [int(m.member_id) for m in members]
+    db_members_rows: List[Tuple] = db.session.query(Member.member_id) \
+        .filter(Member.member_id.in_(member_ids)) \
+        .all()
+    db_member_ids: Set[int] = set(i[0] for i in db_members_rows)
+    members_new = []
+    for m in members:
+        if int(m.member_id) not in db_member_ids:
+            members_new.append(m)
+    db.session.bulk_save_objects(members_new)
 
-    db.session.bulk_save_objects(messages)
+    # Filter out messages that are already in DB
+    message_ids = [int(m.message_id) for m in messages]
+    db_messages: List[Tuple] = db.session.query(Message.message_id)\
+        .filter(Message.chat_id == chat.chat_id)\
+        .filter(Message.message_id.in_(message_ids))\
+        .all()
+    db_message_ids: Set[int] = set(m[0] for m in db_messages)
+    messages_new = []
+    for m in messages:
+        if int(m.message_id) not in db_message_ids:
+            messages_new.append(m)
+
+    db.session.bulk_save_objects(messages_new)
 
     db.session.commit()
 

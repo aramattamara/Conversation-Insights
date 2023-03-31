@@ -7,7 +7,7 @@ from typing import List
 from werkzeug.exceptions import abort
 
 # Import Flask web framework
-from flask import Flask, jsonify, render_template, request, flash, redirect, url_for
+from flask import Flask, jsonify, render_template, request, flash, redirect
 # Import web templating language
 from jinja2 import StrictUndefined
 
@@ -130,9 +130,11 @@ def handle_upload():
 
     export.export_data_json(my_dict)
 
+    chat_id = my_dict["id"]
+
     # json.dump(my_dict, '.json')
 
-    return render_template("dashboard.html", my_dict=my_dict)
+    return redirect(f'/dashboard/{chat_id}')
 
 
 if __name__ == "__main__":
