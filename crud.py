@@ -10,15 +10,19 @@ from sqlalchemy.orm import joinedload
 
 def get_members(chat_id: int):
     """Return all users where chat_id eql selected chat_id."""
-    return Member.query. \
-        join(Message, Member.member_id == Message.member_id). \
-        filter(Message.chat_id == chat_id). \
-        group_by(Member.member_id). \
-        all()
+    return Member.query \
+        .join(Message, Member.member_id == Message.member_id) \
+        .filter(Message.chat_id == chat_id) \
+        .group_by(Member.member_id) \
+        .all()
 
 
-def total_members():
-    return Member.query.all().count()
+def total_members(chat_id: int):
+    return Member.query \
+        .join(Message, Member.member_id == Message.member_id) \
+        .filter(Message.chat_id == chat_id) \
+        .group_by(Member.member_id) \
+        .count()
 
 
 def all_chats():
