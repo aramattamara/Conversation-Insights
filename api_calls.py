@@ -48,7 +48,10 @@ def save_data(data: Dict):
             continue
 
         chat_update = i["message"]["chat"]
-        chat = Chat(chat_id=chat_update["id"],
+        chat_id = chat_update["id"]
+        if chat_id < 0:
+            chat_id = -chat_id - 1000000000000
+        chat = Chat(chat_id=chat_id,
                     title=chat_update["title"])
         chats[chat.chat_id] = chat
 
