@@ -43,8 +43,6 @@ function MemberCollection(props) {
     }
 
 
-
-
     const MemberCards = [];
     for (const member of members) {
         MemberCards.push(
@@ -78,7 +76,7 @@ function MemberCollection(props) {
     function handleSortTotalMaxMin() {
         let sortedMemberCard = [...members].sort((a, b) => {
             return b.total - a.total;
-        })
+        });
         setMembers(sortedMemberCard)
     }
 
@@ -107,7 +105,7 @@ function MemberCollection(props) {
                 <div className="col-6">
                     <h2 className="text-center"> Data Vizualization </h2>
                     <BarChart selectedMembers={selectedMembers}/>
-                    <ChartMesPerMonth selectedMembers={selectedMembers}/>
+                    <ChartMesPerMonth selectedMembers={selectedMembers} chatId={props.chatId}/>
                 </div>
             </div>
         </React.Fragment>

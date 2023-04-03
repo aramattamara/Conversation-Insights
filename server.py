@@ -93,10 +93,15 @@ def process_member_search():
 
 @app.route('/api/mes_per_month.json', methods=["GET"])
 def mes_per_month():
-    selectedIds: List[str] = request.args['selectedIds'].split(',')
-    print(selectedIds)
+    if 'chat_id' not in request.args:
+        return "No chat_id query param", 400
+    chat_id = request.args['chat_id']
+    chat_id = int(chat_id)
 
-    members_with_agg = crud.mes_per_month_per_user(selectedIds)
+    selected_ids: List[str] = request.args['selectedIds'].split(',')
+    print(selected_ids)
+
+    members_with_agg = crud.mes_per_month_per_user(selected_ids, chat_id)
 
     result_dict = {}
     for res in members_with_agg:

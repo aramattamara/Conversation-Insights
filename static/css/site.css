@@ -1,13 +1,14 @@
+@font-face {
+    font-family: 'Basier Circle';
+    src: url('basiercircle-regular.otf') format('opentype');
+}
+
 html, body {
     height: 100%;
     margin: 0 auto;
     padding: 0;
-    /*display: flex;*/
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
     background: rgb(221, 214, 243);
     background: radial-gradient(circle, #F6D5F7 40%, #FBE9D7 100%);
-    color: black;
     max-width: 1024px;
 }
 
@@ -15,30 +16,105 @@ header {
     color: white;
     padding: 10px;
 }
+
 main {
     flex: 1;
     padding: 20px;
 }
 
-footer{
+footer {
     padding: 10px;
-    margin-top: 100px;
+    margin-top: 200px;
     text-align: center;
 }
 
-.icon:hover {
+/*homepage design */
+.homepage-hero-heading {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    color: #070a39;
+    font-size: 64px;
+    line-height: 76px;
+    opacity: 1;
+    transform: translateX(0px) translateY(0px) translateZ(0px);
+    display: block;
+    /*transition: opacity 1000ms ease 0s, transform 1000ms ease 0s;*/
+}
+
+.text-dark-gray {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    color: #59687c;
+    font-size: medium;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.icon-container {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 100px;
+    margin-bottom: 20px;
+}
+
+
+
+
+.icon-feature:hover {
     cursor: pointer;
     transform: scale(1.1, 1.1);
+}
+
+
+
+.icon-container > div {
+    display: inline-flex;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.1);
+    border-style: solid;
+    border-width: 2px;
+    border-color: #6F32BE;
+    overflow: hidden;
+    align-items: center;
+    flex-direction: column;
+    margin-right: 3rem;
+    cursor: pointer;
+    padding: 10px 20px;
+
+}
+
+/*.icon-container > div:hover {*/
+/*    transform: scale(1.1);*/
+/*}*/
+
+.icon-container > div > i {
+    position: absolute;
+    left: 0;
+    font-size: 3rem;
+    margin: 10px;
+    /*transition: all 0.3s ease-in-out;*/
+}
+
+.icon-container > div > span {
+    font-size: 1.2rem;
+    text-align: center;
+    /*transition: all 0.3s ease-in-out;*/
 }
 
 .cards-list {
     border: 1px gray solid;
     border-radius: 10px;
 }
+
 .member-card {
-/*background-color: #ffffff;*/
-/*color: black;*/
-transition: 0.4s;
+    transition: 0.4s;
     border: 1px solid black;
     padding: 10px;
     margin: 15px;
@@ -54,12 +130,12 @@ transition: 0.4s;
     cursor: pointer;
     transform: scale(1.03, 1.03);
 }
+
 .selected {
     border: 2px solid #6F32BE;
-/*background-color: rgba(173, 216, 230, 0.37);*/
-color: #24282a;
+    /*background-color: rgba(173, 216, 230, 0.37);*/
+    color: #24282a;
 }
-
 
 .not-found {
     padding: 15px;
@@ -74,21 +150,22 @@ button {
     margin: 10px;
 }
 
-#start-button:hover{
-    background-color:#f1a977;
+#start-button:hover {
+    background-color: #f1a977;
 }
+
 .btn-default:hover {
     color: #fff;
     background-color: #f1a977;
-    border: 1px solid rgba(0,0,0,.09); /*set the color you want here*/
+    border: 1px solid rgba(0, 0, 0, .09); /*set the color you want here*/
 }
 
-.btn-default{
-    box-shadow:0 2px 2px rgba(0,0,0,.28)
+.btn-default {
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .28)
 }
 
-.btn{
-    font-family:'Lato', sans-serif;
+.btn {
+    font-family: 'Lato', sans-serif;
 }
 
 button:hover {
@@ -107,7 +184,7 @@ button:hover {
     min-height: calc(100% - 50px);
     margin-bottom: -50px;
 }
-/*homepage style*/
+
 
 .features-section {
     display: flex;
@@ -115,8 +192,11 @@ button:hover {
     flex: 1;
     margin: 1px auto;
     text-align: center;
-    color: #555555;
 }
+
+
+
+
 
 .welcome-section {
     display: flex;
@@ -128,6 +208,8 @@ button:hover {
     color: #555555;
 }
 
+
+/*dashboard design */
 .dashboard-section {
     display: flex;
     flex-direction: column;
@@ -140,21 +222,13 @@ button:hover {
 
 
 
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 50px -1rem;
-}
 
-.text-dark-gray {
-    color: #59687c;
-    margin: 10px;
-    font-size: medium;
-}
 
 p {
     font-size: 14px;
 }
+
+
 
 /*style for chatlist */
 .chat-list {
@@ -169,10 +243,11 @@ p {
 .chat {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #f2f2f2;
+    /*background-color: #f2f2f2;*/
     border-radius: 5px;
+    border-color: #6F32BE;
     margin: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);*/
     transition: transform 0.2s ease-in-out;
     text-decoration: none;
 }
@@ -190,60 +265,21 @@ h3 {
 
 /*style for analytics-section*/
 .analytics-section {
+    color: #555555;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.analytics-section h2 {
+.analytics-section {
     margin-bottom: 1rem;
 }
 
-.icon-container {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
+
+
+
+a {
+    color: #555555;
+    text-decoration: none; /* Optional, removes underline */
 }
 
-.icon-container > div {
-    display: inline-flex;
-    border-radius: 4px;
-    background-color: white;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    align-items: center;
-    flex-direction: column;
-    margin-right: 3rem;
-    cursor: pointer;
-    padding: 5px 15px;
-    transition: all 0.3s ease-in-out;
-}
-
-.icon-container > div:hover {
-    transform: scale(1.1);
-}
-
-.icon-container > div > i {
-    font-size: 3rem;
-    margin: 10px;
-    transition: all 0.3s ease-in-out;
-}
-
-.icon-container > div > span {
-    font-size: 1.2rem;
-    text-align: center;
-    transition: all 0.3s ease-in-out;
-}
-
-.icon-container div:hover i {
-    transform: scale(1.2);
-}
-
-.icon-container > div > span {
-    transform: scale(1.1);
-}
-
-.icon-container div:hover {
-    cursor: pointer;
-}

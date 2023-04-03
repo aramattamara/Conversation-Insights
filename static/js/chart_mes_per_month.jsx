@@ -19,7 +19,7 @@ function ChartMesPerMonth(props) {
 
     React.useEffect(() => {
         if (selectedMemberIds.length > 0) {
-            fetch('/api/mes_per_month.json?selectedIds=' + selectedMemberIds.join(','))
+            fetch('/api/mes_per_month.json?selectedIds=' + selectedMemberIds.join(',') + '&chat_id=' + props.chatId)
                 .then((response) => response.json())
                 .then((result) => {
                     setMemberMonthCounts(result);

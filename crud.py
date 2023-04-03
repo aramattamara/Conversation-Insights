@@ -71,7 +71,7 @@ def mes_per_day_per_user(chat_id: int) -> List[Row]:
 #     return result
 
 
-def mes_per_month_per_user(selectedIds) -> List[Row]:
+def mes_per_month_per_user(selected_ids: List[int], chat_id: int) -> List[Row]:
     """Function returns total counts per month per user"""
     query = (db.session.query(
         func.count().label('cnt'),
@@ -79,7 +79,7 @@ def mes_per_month_per_user(selectedIds) -> List[Row]:
         extract('month', func.to_timestamp(Message.date).cast(Date)).cast(Integer).label("month"),
         Message.member_id
     )
-             .filter(Message.member_id.in_(selectedIds))
+             .filter(Message.member_id.in_(selected_ids))
              .group_by('year', 'month', 'member_id')
              .order_by('year', 'month', 'member_id')
              )
