@@ -1,6 +1,7 @@
 """CRUD operations. """
-from typing import List
+from typing import List, Tuple, Dict
 
+import sqlalchemy
 from sqlalchemy import func, extract, Date, Integer
 from model import db, Message, Member, Chat, connect_to_db
 from sqlalchemy.engine.row import Row
@@ -28,16 +29,27 @@ def all_chats():
 
 
 def search_members(search_value: str, chat_id: int) -> List[Member]:
-    """Checks if member exists in DB. If so returns instantiated Member (User) object.
-    Returns none if member not found"""
-    return Member.query\
+    return Member.query \
+        .join(Message, Member.member_id == Message.member_id) \
+        .filter(Message.chat_id == chat_id) \
+        .filter(
+        (Member.first_name.ilike(f'%{search_value}%')) |
+        (Member.last_name.ilike(f'%{search_value}%')) |
+        (Member.member_name.ilike(f'%{search_value}%'))) \
+        .group_by(Member.member_id) \
+        .all()
+
+
+def search_members_with_messages_count(search_value: str, chat_id: int) -> List[Dict]:
+    return db.session.query(Member, func.count().label('total')) \
         .join(Message, Member.member_id == Message.member_id) \
         .filter(Message.chat_id == chat_id) \
         .filter(
             (Member.first_name.ilike(f'%{search_value}%')) |
             (Member.last_name.ilike(f'%{search_value}%')) |
             (Member.member_name.ilike(f'%{search_value}%'))) \
-        .group_by(Member.member_id)\
+        .group_by(Member.member_id) \
+        .order_by(sqlalchemy.desc('total')) \
         .all()
 
 
@@ -48,10 +60,10 @@ def search_members(search_value: str, chat_id: int) -> List[Member]:
 
 def mes_per_day_per_user(chat_id: int) -> List[Row]:
     """Function returns total counts per day per user"""
-    query = db.session\
+    query = db.session \
         .join(Message, Member.member_id == Message.member_id) \
-        .filter(Message.chat_id == chat_id)\
-        .query(func.count().label('cnt'), func.to_timestamp(Message.date).cast(Date).label('day'),Message.member_id)\
+        .filter(Message.chat_id == chat_id) \
+        .query(func.count().label('cnt'), func.to_timestamp(Message.date).cast(Date).label('day'), Message.member_id) \
         .group_by('day', 'member_id')
 
     result = query.all()
@@ -104,3 +116,4 @@ if __name__ == "__main__":
 
     connect_to_db(app)
     print("Connected to DB.")
+    search_members_with_messages_count('val', 1420590782)

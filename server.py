@@ -3,7 +3,7 @@ import json
 import os
 import time
 from threading import Thread
-from typing import List
+from typing import List, Dict, Tuple, NamedTuple
 
 # Import Flask web framework
 from flask import Flask, jsonify, render_template, request, flash, redirect
@@ -82,13 +82,23 @@ def process_member_search():
     chat_id = int(chat_id)
 
     member_search = request.args.get("search-text")
-    members = crud.search_members(member_search, chat_id)
+    rows: List[Dict] = crud.search_members_with_messages_count(member_search, chat_id)
+    # rows: List[Member] = crud.search_members(member_search, chat_id)
 
-    result_json = []
-    for member in members:
-        result_json.append(member.to_dict_with_count(chat_id))
+    result: List[Dict] = []
+    for row in rows:
+        # result_json.append(row.to_dict_with_count(chat_id))
 
-    return jsonify(result_json)
+        member_dict: Dict = {
+            "first_name": row['Member'].first_name,
+            "last_name": row['Member'].last_name,
+            "member_id": row['Member'].member_id,
+            "member_name": row['Member'].member_name,
+            "total": row['total'],
+        }
+        result.append(member_dict)
+
+    return jsonify(result)
 
 
 @app.route('/api/mes_per_month.json', methods=["GET"])

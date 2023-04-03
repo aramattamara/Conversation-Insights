@@ -1,15 +1,15 @@
-SELECT
-    CONCAT(extract(YEAR FROM to_timestamp(date)),
-           '-',
-           extract(MONTH FROM to_timestamp(date))
-        ) AS per_day, member_id,
-    COUNT(*) AS cnt
+SELECT CONCAT(extract(YEAR FROM to_timestamp(date)),
+              '-',
+              extract(MONTH FROM to_timestamp(date))
+           )    AS per_day,
+       member_id,
+       COUNT(*) AS cnt
 FROM messages
 WHERE member_id IN (388268832)
 GROUP BY member_id, per_day;
 
 
-SELECT COUNT(*) cnt,
+SELECT COUNT(*)                      cnt,
        to_timestamp("date")::DATE AS day,
        member_id
 FROM messages
@@ -20,21 +20,34 @@ COPY members
     DELIMITER ','
     CSV HEADER;
 
-DELETE FROM messages WHERE TRUE;
-DELETE FROM members WHERE TRUE;
+DELETE
+FROM messages
+WHERE TRUE;
+DELETE
+FROM members
+WHERE TRUE;
 
-SELECT members.member_id AS members_member_id, members.member_name AS members_member_name, members.first_name AS members_first_name, members.last_name AS members_last_name
+SELECT members.member_id   AS members_member_id,
+       members.member_name AS members_member_name,
+       members.first_name  AS members_first_name,
+       members.last_name   AS members_last_name
 FROM members
 WHERE members.member_id IN (88111010);
 
 
-SELECT members.*
+SELECT members.*, COUNT(*) total, SUM(LENGTH(m.content)) total_length
 FROM members
-INNER JOIN messages m ON members.member_id = m.member_id
+         INNER JOIN messages m ON members.member_id = m.member_id
 WHERE m.chat_id = 1420590782
+-- AND member_name ilike 'sdf'
 GROUP BY members.member_id
+ORDER BY total DESC
 ;
 
-SELECT COUNT(*) FROM members;
 
-DELETE FROM chats WHERE chat_id < 0
+SELECT COUNT(*)
+FROM members;
+
+DELETE
+FROM chats
+WHERE chat_id < 0

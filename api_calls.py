@@ -8,10 +8,12 @@ import requests
 
 from model import Message, Member, Chat, connect_to_db, db
 
-bot_key = os.environ['API_BOT_KEY']
+bot_key = os.environ.get('API_BOT_KEY')
 
 
 def get_updates() -> Dict:
+    assert bot_key is not None, "Env API_BOT_KEY not found"
+
     response = requests.get('https://api.telegram.org/bot' + bot_key + '/getUpdates')
     print('\n\n')
     print(response.text)
