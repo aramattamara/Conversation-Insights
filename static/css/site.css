@@ -138,9 +138,9 @@ p {
 }
 
 
-.accordion-flush .accordion-item .accordion-button {
-    border-radius: 10px;
-}
+/*.accordion-flush .accordion-item .accordion-button, .accordion-body {*/
+/*    border-radius: 10px;*/
+/*}*/
 
 .cards-list {
     border: 1px gray solid;
@@ -199,11 +199,11 @@ p {
 }
 
 .only-new button{
-    width: 300px;
+    width: auto;
     background-color: transparent;
-    border: 2px solid #6F32BE;
-    padding: 10px 20px;
-    border-radius: 10px;
+    border: 3px solid #6F32BE;
+    padding: 11px 30px;
+    border-radius: 20px;
     color: #444;
     cursor: pointer;
     transition: background .2s ease-in-out;
@@ -212,7 +212,7 @@ p {
 .only-new button:hover {
     cursor: pointer;
     background: rgb(234, 230, 253);
-    border-color: #6F32BE;
+    border: 3px dashed #6F32BE;
 }
 
 #content {
@@ -330,7 +330,7 @@ a, a:hover {
     padding-top: 35px;
 }
 
-.how-to h3{
+.how-to h3, h3{
     padding-top: 20px;
     padding-bottom: 20px;
     text-align: center;

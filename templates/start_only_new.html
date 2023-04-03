@@ -4,15 +4,20 @@
 {% block content %}
     <div class="section only-new">
         <div class="row" style="justify-content: space-around; padding-left: 25px">
-            <div class="col-5">
-                <h1 class="homepage-hero-heading" style="font-size: 34px; line-height: 38px; padding-top: 20px">Add<span id="change-color"> @ConversationInsightsBot </span>to your channel</h1>
-                <script src="static/js/change_color.js"></script>
-                <h2 class="text-dark-gray">Please make sure that the channel from which you would like to collect data is public so that everyone can see the statistics for that channel</h2>
-            </div>
             <div class="col-7">
+                <h1 class="homepage-hero-heading" style="font-size: 34px; line-height: 38px; padding-top: 20px">Add<a
+                        href="https://t.me/ConversationInsightsBot" target="_blank"> <span id="change-color"> @ConversationInsightsBot </span></a>to
+                    your channel</h1>
+                <script src="static/js/change_color.js"></script>
+                <h2 class="text-dark-gray">Please make sure that the channel from which you would like to collect data
+                    is public so that everyone can see the statistics for that channel</h2>
+            </div>
+            <div class="col-5"
+                 style="display: flex; flex-direction: column; align-content: center; justify-content: center; flex-wrap: wrap;">
                 <div class="add-bot">
                     <button>
-                        <a href="https://t.me/ConversationInsightsBot" target="_blank" >@ConversationInsightsBot</a>
+                        <h3><a href="https://t.me/ConversationInsightsBot" target="_blank">@ConversationInsightsBot</a>
+                        </h3>
                     </button>
                 </div>
             </div>
@@ -20,13 +25,15 @@
     </div>
 
     <div>
-        <h2>Or select channel</h2>
-        <ul class="chat-list">
+        <h3>Or select channel</h3>
+        <ul class="list-group list-group-flusht">
             {% for chat in chats %}
-                <li>
-                    <a href="/dashboard/{{ chat.chat_id }}" class="chat">
-                        <h3> {{ chat.title }}</h3>
-                    </a>
+                <li class="list-group-item">
+                    <h5>
+                        <a href="/dashboard/{{ chat.chat_id }}" class="chat">
+                            {{ chat.title }}
+                        </a>
+                    </h5>
                 </li>
             {% endfor %}
         </ul>
