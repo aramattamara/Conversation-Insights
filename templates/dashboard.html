@@ -4,13 +4,15 @@
 {% block title %} Dashboard {% endblock %}
 
 {% block content %}
-    <input type="hidden" value="{{ chat_id }}" id="chat_id"/>
-    <div class="container">
-        <div class="page-header">
-            <h2 class="text-center"> Dashboard </h2>
+    <div class="dashboard">
+        <input type="hidden" value="{{ chat_id }}" id="chat_id"/>
+        <div class="container">
+            <div class="page-header">
+                <h2 class="text-center"> Dashboard </h2>
+            </div>
         </div>
-    </div>
 
-    <div class="container" id="container"></div>
+        <div class="container" id="container"></div>
+    </div>
 
 {% endblock %}

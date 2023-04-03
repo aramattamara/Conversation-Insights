@@ -2,44 +2,106 @@
 <title>{% block title %}Conversation Insights{% endblock %}</title>
 
 {% block content %}
-    <!-- historical-data-section -->
+    <div class="section no-padding">
+        <div class="row" style="justify-content: space-around; padding-left: 25px">
+            <div class="col-5">
+                <h1 class="homepage-hero-heading" style="font-size: 48px"><span id="change-color"> Upload your channel </span>.json </h1>
+                <script src="static/js/change_color.js"></script>
+                <h2 class="text-dark-gray">Export your channel's history as a .json file and upload it</h2>
+            </div>
+            <div class="col-7">
+                <div>
+                    <label for="file" class="drop-container">
+                        <span class="drop-title">Drop file here</span>
+                        or
+                        <form action="/upload" method="POST" enctype="multipart/form-data">
+                            <input type="file" name="file" class="upload-file" required/>
+                            <br>
+                            <input type="submit" class="upload-file"/>
+                        </form>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="how-to">
+        <h3>How to export channel history from Telegram?</h3>
 
-        <h3>How to upload chat history</h3>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Launch the Telegram app on your desktop and open the channel for which you want to
+                        export chat.
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Now click on the three-dot icon at the top-right of the screen. From the various
+                        options available, click on the Export chat history.
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body"><img src="static/img/select-contact-and-export-chat-history.png"
+                                                     alt="select-contact-and-export-chat-history" width="200"
+                                                     height=auto>
+                    </div>
+                </div>
+            </div>
 
-
-        <div class="setup">
-            <input type="checkbox" id="setup1" name="setup1" value="Open">
-            <label for="setup1"> Launch the Telegram app on your desktop and open the channel for which you want to
-                export chat.</label><br>
-            <input type="checkbox" id="setup2" name="setup2" value="Car">
-            <label for="setup2"> Now click on the three-dot icon at the top-right of the screen. From the various
-                options available, click on the Export chat history.</label><br>
-            <img src="static/img/select-contact-and-export-chat-history.png"
-                 alt="select-contact-and-export-chat-history" width="200" height=auto><br>
-            <input type="checkbox" id="setup3" name="setup3" value="Boat">
-            <label for="setup3"> Right after clicking, a Chat export settings window will pop-up. Here you can
-                select various files like photos or videos that you want to export along with your chats. We don't
-                need any photos or videos, so be sure that you unselect all of them.
-                Selecting the path of download is also possible along with the dates, the data between which you
-                want to download.</label><br>
-            <img src="static/img/json-format.png" alt="json-format" width="200" height=auto><br>
-            <input type="checkbox" id="setup4" name="setup4" value="Boat">
-            <label for="setup4"> Right after clicking, a Chat export settings window will pop-up. Here you can
-                select various files like photos or videos that you want to export along with your chats. We don't
-                need any photos or videos, so br sure that you unselect all of them.
-                Selecting the path of download is also possible along with the dates, the data between which you
-                want to download.</label><br>
-            <img src="static/img/export-data.png" alt="json-format" width="200" height=auto><br>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseThree" aria-expanded="false"
+                            aria-controls="flush-collapseThree">
+                        Right after clicking, a Chat export settings window will pop-up. Here you can
+                        select various files like photos or videos that you want to export along with your chats. We
+                        don't
+                        need any photos or videos, so be sure that you unselect all of them.
+                        Selecting the path of download is also possible along with the dates, the data between which you
+                        want to download.
+                    </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body"><img src="static/img/json-format.png" alt="json-format" width="200"
+                                                     height=auto><br>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseFour" aria-expanded="false"
+                            aria-controls="flush-collapseFour">
+                        Right after clicking, a Chat export settings window will pop-up. Here you can
+                        select various files like photos or videos that you want to export along with your chats. We
+                        don't
+                        need any photos or videos, so be sure that you unselect all of them.
+                        Selecting the path of download is also possible along with the dates, the data between which you
+                        want to download.
+                    </button>
+                </h2>
+                <div id="flush-collapseFour" class="accordion-collapse collapse"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body"><img src="static/img/export-data.png" alt="json-format" width="200"
+                                                     height=auto><br>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div>
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-                <input type="file" name="file"/>
-                <br>
-                <input type="submit"/>
-            </form>
-        </div>
+    </div>
+
 
 
 {% endblock %}

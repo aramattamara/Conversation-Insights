@@ -24,8 +24,12 @@ main {
 
 footer {
     padding: 10px;
-    margin-top: 200px;
+    margin-top: 150px;
     text-align: center;
+}
+
+footer div a{
+    color: #6F32BE;
 }
 
 /*homepage design */
@@ -60,22 +64,14 @@ footer {
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-    margin-left: 100px;
-    margin-bottom: 20px;
+    margin-left: 150px;
+    margin-bottom: 10px;
+    width: 390px;
 }
-
-
-
-
-.icon-feature:hover {
-    cursor: pointer;
-    transform: scale(1.1, 1.1);
-}
-
-
 
 .icon-container > div {
-    display: inline-flex;
+    width: 290px;
+    display: block;
     border-radius: 20px;
     box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.1);
     border-style: solid;
@@ -86,31 +82,71 @@ footer {
     flex-direction: column;
     margin-right: 3rem;
     cursor: pointer;
-    padding: 10px 20px;
-
 }
 
-/*.icon-container > div:hover {*/
-/*    transform: scale(1.1);*/
-/*}*/
+.icon a{
+    display: block;
+    padding: 10px 20px;
+}
 
 .icon-container > div > i {
     position: absolute;
     left: 0;
     font-size: 3rem;
     margin: 10px;
-    /*transition: all 0.3s ease-in-out;*/
+    transition: all 0.3s ease-in-out;
 }
 
 .icon-container > div > span {
     font-size: 1.2rem;
     text-align: center;
-    /*transition: all 0.3s ease-in-out;*/
+    transition: all 0.3s ease-in-out;
+}
+
+.icon-container > div:hover {
+    transform: scale(1.1);
+}
+
+
+.ui-icon-block{
+    align-items: center;
+    width: 290px;
+    height: 270px;
+    margin: 15px;
+    padding-top: 10px;
+    border-radius: 20px;
+}
+
+.ui-icon-block p{
+    margin: 5px;
+}
+
+.features-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 1px auto;
+    text-align: center;
+}
+
+.icon-feature:hover {
+    transform: scale(1.1, 1.1);
+}
+
+p {
+    font-size: 14px;
+}
+
+
+.accordion-flush .accordion-item .accordion-button {
+    border-radius: 10px;
 }
 
 .cards-list {
     border: 1px gray solid;
     border-radius: 10px;
+    max-height: 500px;
+    overflow-y: scroll;
 }
 
 .member-card {
@@ -145,38 +181,21 @@ footer {
     text-align: center;
 }
 
-button {
-    border-radius: 5px;
-    margin: 10px;
-}
-
-#start-button:hover {
-    background-color: #f1a977;
-}
-
-.btn-default:hover {
-    color: #fff;
-    background-color: #f1a977;
-    border: 1px solid rgba(0, 0, 0, .09); /*set the color you want here*/
-}
-
-.btn-default {
-    box-shadow: 0 2px 2px rgba(0, 0, 0, .28)
-}
-
-.btn {
-    font-family: 'Lato', sans-serif;
-}
-
-button:hover {
+.dashboard button {
+    width: 220px;
+    background-color: transparent;
+    border: 2px dashed #555;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #444;
     cursor: pointer;
-    transform: scale(1.03, 1.03);
+    transition: background .2s ease-in-out;
 }
 
-#main-wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
+.dashboard button:hover {
+    cursor: pointer;
+    background: rgb(234, 230, 253);
+    border-color: #6F32BE;
 }
 
 #content {
@@ -184,51 +203,6 @@ button:hover {
     min-height: calc(100% - 50px);
     margin-bottom: -50px;
 }
-
-
-.features-section {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    margin: 1px auto;
-    text-align: center;
-}
-
-
-
-
-
-.welcome-section {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-    flex: 1;
-    margin: 10px auto;
-    text-align: center;
-    color: #555555;
-}
-
-
-/*dashboard design */
-.dashboard-section {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-    flex: 1;
-    margin: 10px auto;
-    text-align: center;
-    color: #555555;
-}
-
-
-
-
-
-p {
-    font-size: 14px;
-}
-
-
 
 /*style for chatlist */
 .chat-list {
@@ -238,16 +212,16 @@ p {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    max-height: 500px;
+    overflow-y: scroll;
 }
 
 .chat {
     display: inline-block;
     padding: 10px 20px;
-    /*background-color: #f2f2f2;*/
     border-radius: 5px;
     border-color: #6F32BE;
     margin: 10px;
-    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);*/
     transition: transform 0.2s ease-in-out;
     text-decoration: none;
 }
@@ -276,10 +250,81 @@ h3 {
 }
 
 
-
-
-a {
+a, a:hover {
     color: #555555;
     text-decoration: none; /* Optional, removes underline */
 }
 
+
+.drop-container {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 20px;
+    border: 2px dashed #555;
+    color: #444;
+    cursor: pointer;
+    transition: background .2s ease-in-out, border .2s ease-in-out;
+}
+
+.drop-container:hover {
+    background: rgb(234, 230, 253);
+    border-color: #6F32BE;
+}
+
+.drop-container:hover .drop-title {
+    color: #222;
+}
+
+.drop-title {
+    color: #444;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    transition: color .2s ease-in-out;
+}
+
+.upload-file {
+    width: 350px;
+    max-width: 100%;
+    color: #444;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #6F32BE;
+}
+.upload-file::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: #6F32BE;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+}
+.upload-file::file-selector-button:hover {
+    background: #6F32BE;
+}
+
+.how-to{
+    padding-top: 35px;
+}
+
+.how-to h3{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.sort{
+    display: flex;
+    justify-content: space-around;
+}
