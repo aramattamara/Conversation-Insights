@@ -2,8 +2,25 @@
 <title>{% block title %}Conversation Insights{% endblock %}</title>
 
 {% block content %}
+    <div class="section only-new">
+        <div class="row" style="justify-content: space-around; padding-left: 25px">
+            <div class="col-5">
+                <h1 class="homepage-hero-heading" style="font-size: 34px; line-height: 38px; padding-top: 20px">Add<span id="change-color"> @ConversationInsightsBot </span>to your channel</h1>
+                <script src="static/js/change_color.js"></script>
+                <h2 class="text-dark-gray">Please make sure that the channel from which you would like to collect data is public so that everyone can see the statistics for that channel</h2>
+            </div>
+            <div class="col-7">
+                <div class="add-bot">
+                    <button>
+                        <a href="https://t.me/ConversationInsightsBot" target="_blank" >@ConversationInsightsBot</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div>
-        <h2>If you don't see your channel here</h2>
+        <h2>Or select channel</h2>
         <ul class="chat-list">
             {% for chat in chats %}
                 <li>
@@ -13,12 +30,6 @@
                 </li>
             {% endfor %}
         </ul>
-
-
-        <h2>Add this bot to the channel and refresh page</h2>
-        <a href="https://t.me/ConversationInsightsBot" target="_blank" >@ConversationInsightsBot</a>
-
-
 
     </div>
 
