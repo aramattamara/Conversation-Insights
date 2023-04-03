@@ -3,7 +3,7 @@ import json
 import os
 import time
 from threading import Thread
-from typing import List, Dict, Tuple, NamedTuple
+from typing import List, Dict
 
 # Import Flask web framework
 from flask import Flask, jsonify, render_template, request, flash, redirect
@@ -17,7 +17,7 @@ import api_calls
 import crud
 import export
 # Import model.py table definitions
-from model import connect_to_db, Member
+from model import connect_to_db, Member, Chat
 
 app = Flask(__name__)
 
@@ -43,7 +43,10 @@ def homepage():
 
 @app.route("/dashboard/<chat_id>")
 def dashboard(chat_id):
-    return render_template("dashboard.html", chat_id=chat_id)
+    chat: Chat = crud.get_chat(chat_id)
+    if chat is None:
+        return "No such chat_id: " + chat_id, 400
+    return render_template("dashboard.html", chat_id=chat_id, chat_title=chat.title)
 
 
 @app.route("/start_historical")
@@ -109,7 +112,8 @@ def mes_per_month():
     chat_id = int(chat_id)
 
     selected_ids: List[str] = request.args['selectedIds'].split(',')
-    print(selected_ids)
+    selected_ids: List[int] = [int(sel_id) for sel_id in selected_ids]
+    # print(selected_ids)
 
     members_with_agg = crud.mes_per_month_per_user(selected_ids, chat_id)
 

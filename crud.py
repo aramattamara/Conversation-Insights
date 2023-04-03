@@ -1,5 +1,5 @@
 """CRUD operations. """
-from typing import List, Tuple, Dict
+from typing import List, Dict
 
 import sqlalchemy
 from sqlalchemy import func, extract, Date, Integer
@@ -92,6 +92,7 @@ def mes_per_month_per_user(selected_ids: List[int], chat_id: int) -> List[Row]:
         Message.member_id
     )
              .filter(Message.member_id.in_(selected_ids))
+             .filter(Message.chat_id == chat_id)
              .group_by('year', 'month', 'member_id')
              .order_by('year', 'month', 'member_id')
              )
@@ -117,3 +118,7 @@ if __name__ == "__main__":
     connect_to_db(app)
     print("Connected to DB.")
     search_members_with_messages_count('val', 1420590782)
+
+
+def get_chat(chat_id: int) -> Chat:
+    return Chat.query.get(chat_id)
