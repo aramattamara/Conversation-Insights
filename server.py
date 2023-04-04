@@ -44,9 +44,10 @@ def homepage():
 @app.route("/dashboard/<chat_id>")
 def dashboard(chat_id):
     chat: Chat = crud.get_chat(chat_id)
+    total_members = crud.total_members(chat_id)
     if chat is None:
         return "No such chat_id: " + chat_id, 400
-    return render_template("dashboard.html", chat_id=chat_id, chat_title=chat.title)
+    return render_template("dashboard.html", chat_id=chat_id, chat_title=chat.title, total_members=total_members)
 
 
 @app.route("/start_historical")
