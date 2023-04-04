@@ -169,6 +169,7 @@ p {
 
 .selected {
     border: 2px solid #6F32BE;
+    background-color: rgb(234, 230, 253);
     /*background-color: rgba(173, 216, 230, 0.37);*/
     color: #24282a;
 }
@@ -339,4 +340,18 @@ a, a:hover {
 .sort{
     display: flex;
     justify-content: space-between;
+}
+.total-message{
+    color:#6F32BE;
+    font-size: 24px;
+}
+
+.fname_lname{
+    color:#cf3881;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#data_viz{
+    padding-top: 90px;
 }

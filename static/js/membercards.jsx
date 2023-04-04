@@ -1,3 +1,4 @@
+
 function MemberCard(props) {
 
     // const [isSelected, setIsSelected] = React.useState(false);
@@ -9,9 +10,9 @@ function MemberCard(props) {
     return (
         <div className={`member-card ${props.selected ? 'selected' : ''}`}
              onClick={props.toggleSelected}>
-            <p>{props.fname} {props.lname}</p>
+            <p className="fname_lname">{props.fname} {props.lname}</p>
             <p>Username: @{props.member_name}</p>
-            <p>Total Messages: {props.total}</p>
+            <p>Total Messages: <span className="total-message"> {props.total} </span> </p>
         </div>
     );
 }
@@ -102,8 +103,8 @@ function MemberCollection(props) {
                         {MemberCards}
                     </div>
                 </div>
-                <div className="col-6">
-                    <h2 className="text-center"> Data Vizualization </h2>
+                <div className="col-6" id="data_viz">
+                    {/*<h2 className="text-center"> Data Vizualization </h2>*/}
                     <BarChart selectedMembers={selectedMembers}/>
                     <ChartMesPerMonth selectedMembers={selectedMembers} chatId={props.chatId}/>
                 </div>
