@@ -3,11 +3,13 @@
 
 {% block content %}
     <div><a href="javascript:window.history.back();">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-left" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#6f32be" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-left" width="44"
+             height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#6f32be" fill="none" stroke-linecap="round"
+             stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <line x1="5" y1="12" x2="9" y2="16" />
-            <line x1="5" y1="12" x2="9" y2="8" />
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <line x1="5" y1="12" x2="9" y2="16"/>
+            <line x1="5" y1="12" x2="9" y2="8"/>
         </svg>
     </a></div>
     <div class="section only-new">
@@ -36,12 +38,27 @@
         <h3>Or select channel</h3>
         <ul class="list-group list-group-flusht">
             {% for chat in chats %}
-                <li class="list-group-item">
-                    <h5>
-                        <a href="/dashboard/{{ chat.chat_id }}" class="chat">
-                            {{ chat.title }}
-                        </a>
-                    </h5>
+                <li class="list-group-item" style="padding: 0; background-color: transparent; border: none">
+                    {#                    <div class="flex-parent-element">#}
+                    <a href="/dashboard/{{ chat.chat_id }}" class="chat">
+                            <span>
+                               <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="icon icon-tabler icon-tabler-chevron-right" width="28" height="28"
+                                    viewBox="0 0 24 24" stroke-width="3" stroke="#6f32be" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                   <polyline points="9 6 15 12 9 18"/>
+                                </svg>
+                                <span style="color: #cf3881; font-size: 24px">
+                                   {{ chat.title }}
+                                </span>
+                            </span>
+                        <span>
+                                total members: <span
+                                style="font-size: 20px; color: #e9572f">{{ chat.total_members }}</span>
+                            </span>
+                    </a>
+                    {#                    </div>#}
                 </li>
             {% endfor %}
         </ul>

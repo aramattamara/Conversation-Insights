@@ -28,6 +28,14 @@ def all_chats():
     return Chat.query.all()
 
 
+def all_chats_with_total_members():
+    return db.session.query(Chat.chat_id, Chat.title, func.count(Message.member_id.distinct()).label('total_members')) \
+        .join(Message, Chat.chat_id == Message.chat_id) \
+        .group_by(Chat.chat_id) \
+        .order_by(Chat.chat_id) \
+        .all()
+
+
 def search_members(search_value: str, chat_id: int) -> List[Member]:
     return Member.query \
         .join(Message, Member.member_id == Message.member_id) \

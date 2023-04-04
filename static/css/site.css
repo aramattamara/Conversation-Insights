@@ -55,7 +55,7 @@ footer div a{
 .row {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 50px;
+    /*margin-top: 50px;*/
     margin-bottom: 20px;
 }
 
@@ -230,11 +230,12 @@ p {
 }
 
 .chat {
-    display: inline-block;
-    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 235px;
     border-radius: 5px;
     border-color: #6F32BE;
-    margin: 10px;
+    margin: 0px;
     transition: transform 0.2s ease-in-out;
     text-decoration: none;
 }

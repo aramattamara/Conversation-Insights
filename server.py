@@ -57,7 +57,7 @@ def start():
 
 @app.route("/start_only_new")
 def start_new():
-    chats = crud.all_chats()
+    chats = crud.all_chats_with_total_members()
     return render_template("start_only_new.html", chats=chats)
 
 

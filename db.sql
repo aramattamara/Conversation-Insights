@@ -44,6 +44,10 @@ GROUP BY members.member_id
 ORDER BY total DESC
 ;
 
+SELECT m., COUNT(DISTINCT m.member_id) AS total_members
+FROM messages m
+GROUP BY m.chat_id
+ORDER BY m.chat_id
 
 SELECT COUNT(*)
 FROM members;
