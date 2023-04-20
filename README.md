@@ -19,7 +19,7 @@ the platform, develop new features, or inform marketing and advertising strategi
 * [Set up](#setup)
 * [About Me](#author)
 * 
-  **Demo Video:**
+  
 
 
 
@@ -30,7 +30,7 @@ the platform, develop new features, or inform marketing and advertising strategi
 * APIs: Chart.js, Telegram API
 
 ## Features
-
+**Demo Video:**
 <a href="https://www.youtube.com/watch?feature=player_embedded&v=rgt0_Jm-muE"
 target="_blank"><img src="http://img.youtube.com/vi/rgt0_Jm-muE/0.jpg"
 alt="Conversation Insights" width="150" height="100" border="0" /></a>
@@ -41,6 +41,11 @@ helpful for identifying patterns in messaging behavior and improving overall pro
 User behavior insights: This feature shows who is the most active member of the chat.
 
 Search: This feature helps navigate throught all members of chat and easy find them.
+
+<img src="static/screenshots/home_page.png">
+<img src="static/screenshots/add_bot.png">
+<img src="static/screenshots/upload_history.png">
+<img src="static/screenshots/dashoard.png.png">
 
 
 ## <a name="nextsteps"></a>Project Next Steps
