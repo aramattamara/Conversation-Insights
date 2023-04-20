@@ -18,10 +18,6 @@ the platform, develop new features, or inform marketing and advertising strategi
 * [Project Next Steps](#nextsteps)
 * [Set up](#setup)
 * [About Me](#author)
-* 
-  
-
-
 
 ## <a name="technologiesused"></a>Technologies Used
 
@@ -31,6 +27,7 @@ the platform, develop new features, or inform marketing and advertising strategi
 
 ## Features
 **Demo Video:**
+
 <a href="https://www.youtube.com/watch?feature=player_embedded&v=rgt0_Jm-muE"
 target="_blank"><img src="http://img.youtube.com/vi/rgt0_Jm-muE/0.jpg"
 alt="Conversation Insights" width="150" height="100" border="0" /></a>
@@ -45,7 +42,7 @@ Search: This feature helps navigate throught all members of chat and easy find t
 <img src="static/screenshots/home_page.png">
 <img src="static/screenshots/add_bot.png">
 <img src="static/screenshots/upload_history.png">
-<img src="static/screenshots/dashoard.png.png">
+<img src="static/screenshots/dashoard.png">
 
 
 ## <a name="nextsteps"></a>Project Next Steps
