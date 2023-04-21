@@ -21,9 +21,10 @@ the platform, develop new features, or inform marketing and advertising strategi
 
 ## <a name="technologiesused"></a>Technologies Used
 
-* Backend: Python3, Flask, PostgreSQL, SQLAlchemy
-* Frontend: React JS, Bootstrap, Jinja2, HTML5, CSS3
-* APIs: Chart.js, Telegram API
+<strong>Backend:</strong> Python3, [Flask](https://flask.palletsprojects.com/en/2.1.x/), [PostgreSQL](https://www.postgresql.org/), [SQLAlchemy](https://www.sqlalchemy.org/)<br />
+<strong>Frontend:</strong> React JS, [Bootstrap](https://getbootstrap.com), HTML5, CSS3, [JQuery](https://jquery.com), Jinja2, HTML5, CSS3 <br />
+<strong>APIs:</strong> [Telegram API](https://core.telegram.org/) <br />
+<strong>Libraries:</strong> [Chart.js GEO](https://github.com/sgratzl/chartjs-chart-geo) <br />
 
 ## Features
 **Demo Video:**
