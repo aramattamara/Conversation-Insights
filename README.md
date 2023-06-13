@@ -77,5 +77,5 @@ Open up 'localhost:5000/' to access the app
 
 ## <a name="author"></a>About Me
 
-Tamara is a software engineer originally from Ukraine, and currently living in CA. This is her first full stack
+I am a software engineer originally from Ukraine, and currently living in California, USA. This is my first full stack
 project. Visit my [LinkedIn](https://www.linkedin.com/in/tamara-vashchuk/)
