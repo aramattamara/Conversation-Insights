@@ -2,8 +2,7 @@
 
 #### A full-stack web application built in 4 weeks as Hackbright Fellowship final project.
 
-The Conversation Insights is an initiative aimed at gathering insights and understanding trends from data collected
-within the Telegram messaging platform. The project may involve the use of data analytics tools and techniques to
+The Conversation Insights finds trends from Telegram messages. The project may involve the use of data analytics tools and techniques to
 process and analyze large volumes of data, with the goal of identifying patterns, trends, and other useful information
 that can inform decision-making or help improve the user experience on Telegram. Possible areas of analysis may include
 user behavior, messaging frequency, demographics, and more. The insights gained from the project may be used to improve
