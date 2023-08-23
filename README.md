@@ -66,7 +66,7 @@ pip install -r requirements.txt
 ```
 Set up the database:
 ```
-python3 seed_database.py
+python3 seed.py
 ```
 Run the app:
 ```
