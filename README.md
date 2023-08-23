@@ -52,27 +52,36 @@ Search: This feature helps navigate throught all members of chat and easy find t
 
 ## <a name="setup"></a>Set up
 Clone or fork this repo:
-```
-git@github.com:aramattamara/Conversation-Insights.git
+```sh
+git clone git@github.com:aramattamara/Conversation-Insights.git
 ```
 Create and activate a virtual environment inside your directory:
-```
+```sh
 virtualenv env
 source env/bin/activate
 ```
 Install the dependencies:
-```
+```sh
 pip install -r requirements.txt
 ```
 Set up the database:
-```
+```sh
 python3 seed.py
 ```
 Run the app:
-```
+```sh
 python3 server.py
 ```
 Open up 'localhost:5000/' to access the app
+
+### Development set-up
+#### Update python dependencies
+To regenerate requirements.txt from requirements.in, run:
+```sh
+pip3 install pip-tools
+pip-compile
+```
+
 
 ## <a name="author"></a>About Me
 

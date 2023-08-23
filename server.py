@@ -1,11 +1,10 @@
-# System
+# Server for conversation insights app
 import json
 import os
 import time
 from threading import Thread
 from typing import List, Dict
 
-# Import Flask web framework
 from flask import Flask, jsonify, render_template, request, flash, redirect
 # Import web templating language
 from jinja2 import StrictUndefined
@@ -38,7 +37,13 @@ UPDATE_EVERY_SEC = int(os.environ.get('UPDATE_EVERY_SEC', '60'))
 @app.route("/")
 def homepage():
     """Show homepage."""
+    session_user_id = session.get("user_id")
+
+    if session_user_id:
+        return redirect("/profile")
+
     return render_template("homepage.html")
+
 
 
 @app.route("/dashboard/<chat_id>")
