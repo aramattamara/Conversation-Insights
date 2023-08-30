@@ -3,8 +3,26 @@ from typing import List, Dict
 
 import sqlalchemy
 from sqlalchemy import func, extract, Date, Integer
-from model import db, Message, Member, Chat, connect_to_db
+from model import db, User, Message, Member, Chat, connect_to_db
 from sqlalchemy.engine.row import Row
+
+def create_user(email, password, name):
+    """Create and return a new user"""
+
+    user = User(email=email, password=password, name=name)
+    return user
+
+
+def get_user_by_email(email):
+    """Return a user by email, returns None if not found"""
+
+    return User.query.filter(User.email == email).first()
+
+def get_user_by_id(user_id):
+    """Return a user by their ID, returns None if not found"""
+
+    return User.query.get(user_id)
+
 
 
 def get_members(chat_id: int):
@@ -120,13 +138,14 @@ def mes_per_year_per_user() -> List[Row]:
     return result
 
 
+#######################################################################
+
 if __name__ == "__main__":
     from server import app
 
     connect_to_db(app)
     print("Connected to DB.")
     search_members_with_messages_count('val', 1420590782)
-
 
 def get_chat(chat_id: int) -> Chat:
     return Chat.query.get(chat_id)

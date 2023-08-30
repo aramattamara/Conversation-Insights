@@ -1,30 +1,24 @@
 # Server for conversation insights app
+from flask import Flask, jsonify, render_template, request, session, flash, redirect
+from model import connect_to_db, Member, Chat
+from argon2 import PasswordHasher
+from jinja2 import StrictUndefined
+from typing import List, Dict
+from werkzeug.exceptions import abort
+from threading import Thread
+
 import json
 import os
 import time
-from threading import Thread
-from typing import List, Dict
-
-from flask import Flask, jsonify, render_template, request, flash, redirect
-# Import web templating language
-from jinja2 import StrictUndefined
-# Import werkzeug web framework
-from werkzeug.exceptions import abort
-
 import api_calls
-# Import crud that handles SQLAlchemy queries
 import crud
+import model
 import export
-# Import model.py table definitions
-from model import connect_to_db, Member, Chat
 
 app = Flask(__name__)
-
-# Required to use Flask session and the debug toolbar
 app.secret_key = "dev"
-
-# So that undefined variables in Jinja2 will strike an error vs. failing silently
 app.jinja_env.undefined = StrictUndefined
+ph = PasswordHasher()
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_EXTENSIONS'] = ['.json']
@@ -34,9 +28,10 @@ UPLOAD_FOLDER = 'upload'
 UPDATE_EVERY_SEC = int(os.environ.get('UPDATE_EVERY_SEC', '60'))
 
 
+####################### HOMEPAGE/LOGIN/LOGOUT/REGISTER ##############################
 @app.route("/")
 def homepage():
-    """Show homepage."""
+    """View homepage."""
     session_user_id = session.get("user_id")
 
     if session_user_id:
@@ -44,6 +39,96 @@ def homepage():
 
     return render_template("homepage.html")
 
+@app.route("/register", methods=["POST"])
+def register_user():
+    """Register a new user."""
+
+    user_email = request.form.get("email")
+    user_password = request.form.get("password")
+    user_name = request.form.get("name")
+
+    # check that user does not exist in db
+    user = crud.get_user_by_email(user_email)
+
+    # if user exist in db, tell them to login
+    if user:
+        flash("That email already exist, try logging in")
+        return redirect("/")
+
+    # if user does not exist in db yet, add and commit their info to db
+    else:
+        # but first check if they entered a password
+        if not user_password:
+            flash("Please enter in a password")
+            return redirect("/")
+        else:
+            hashed_pw = ph.hash(user_password)
+            new_user = crud.create_user(user_email, hashed_pw, user_name)
+            model.db.session.add(new_user)
+            model.db.session.commit()
+
+@app.route("/login", methods=["POST"])
+def login():
+    """Process user login."""
+
+    # get user email and password from Login form
+    user_email = request.form.get("email")
+    password = request.form.get("password")
+
+    # query db for user, if no user will return None, if user will return user object
+    user = crud.get_user_by_email(user_email)
+
+    # if query returns None, redirect to try signing in again
+    if not user:
+        flash("That email does not exist!")
+        return redirect('/')
+
+    # if user in db, check that their password is correct
+    else:
+        try:
+            ph.verify(user.password, password)
+        except:
+            flash(f"{user.email}, check your password")
+            return redirect("/")
+
+        # if their password is correct, store their user_id in session
+        session["user_id"] = user.user_id
+
+        # welcome them back using their email from the Loging Form
+        flash(f"Welcome back, {user.name}!")
+
+        # take them to their profile page with ID from session
+        return redirect("/profile")
+
+@app.route("/profile/logout")
+def user_logout():
+    """Process user logout."""
+
+    session.clear()
+
+    return redirect("/")
+
+
+
+##################### User Profile Routes ############################################
+@app.route("/profile")
+def user_profile():
+    # """Show user's profile page."""
+
+    # getting the user's user_id from session, returns None if no user_id
+    session_user_id = session.get("user_id")
+
+    # if there is no user_id in the session, ask the user to Login
+    if not session_user_id:
+        flash("Please Login")
+        return redirect("/")
+
+    # querying the db with the user_id stored in session
+    user = crud.get_user_by_id(session_user_id)
+
+    # returns a list of the user's chats
+
+    return render_template("profile.html", user=user)
 
 
 @app.route("/dashboard/<chat_id>")
@@ -175,9 +260,9 @@ if __name__ == "__main__":
 
     app.debug = True
 
-    connect_to_db(app, echo=False)
+    connect_to_db(app, echo=True)
 
-    app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
+    app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = True
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     # Use the DebugToolbar
@@ -186,4 +271,4 @@ if __name__ == "__main__":
     t = Thread(name="updates-watcher", target=pull_updates_cron, daemon=True)
     t.start()
 
-    app.run(host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')
