@@ -27,6 +27,8 @@ UPLOAD_FOLDER = 'upload'
 
 UPDATE_EVERY_SEC = int(os.environ.get('UPDATE_EVERY_SEC', '60'))
 
+connect_to_db(app, echo=True)
+
 
 ####################### HOMEPAGE/LOGIN/LOGOUT/REGISTER ##############################
 @app.route("/")
@@ -38,6 +40,7 @@ def homepage():
         return redirect("/profile")
 
     return render_template("homepage.html")
+
 
 @app.route("/register", methods=["POST"])
 def register_user():
@@ -66,6 +69,7 @@ def register_user():
             new_user = crud.create_user(user_email, hashed_pw, user_name)
             model.db.session.add(new_user)
             model.db.session.commit()
+
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -100,6 +104,7 @@ def login():
         # take them to their profile page with ID from session
         return redirect("/profile")
 
+
 @app.route("/profile/logout")
 def user_logout():
     """Process user logout."""
@@ -107,7 +112,6 @@ def user_logout():
     session.clear()
 
     return redirect("/")
-
 
 
 ##################### User Profile Routes ############################################
@@ -259,8 +263,6 @@ if __name__ == "__main__":
     # that we invoke the DebugToolbarExtension
 
     app.debug = True
-
-    connect_to_db(app, echo=True)
 
     app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = True
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
