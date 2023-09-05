@@ -262,8 +262,6 @@ if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
 
-    app.debug = True
-
     app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = True
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -273,4 +271,4 @@ if __name__ == "__main__":
     t = Thread(name="updates-watcher", target=pull_updates_cron, daemon=True)
     t.start()
 
-    app.run(debug=True, host='0.0.0.0')
+    app.run(host='0.0.0.0')
