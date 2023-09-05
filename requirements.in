@@ -1,5 +1,6 @@
 argon2-cffi
 Flask
+flask-debugtoolbar
 Flask-SQLAlchemy
 Flask-WTF
 Jinja2
