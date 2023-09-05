@@ -1,3 +1,4 @@
+argon2-cffi
 Flask
 Flask-SQLAlchemy
 Flask-WTF
