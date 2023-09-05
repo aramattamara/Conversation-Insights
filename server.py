@@ -1,5 +1,7 @@
 # Server for conversation insights app
 from flask import Flask, jsonify, render_template, request, session, flash, redirect
+from flask_debugtoolbar import DebugToolbarExtension
+
 from model import connect_to_db, Member, Chat
 from argon2 import PasswordHasher
 from jinja2 import StrictUndefined
@@ -22,8 +24,12 @@ ph = PasswordHasher()
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_EXTENSIONS'] = ['.json']
-UPLOAD_FOLDER = 'upload'
-# ALLOWED_EXTENSIONS = {'json'}
+app.config['UPLOAD_FOLDER'] = 'upload'
+
+# Use the DebugToolbar
+app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = True
+app.config["DEBUG_TB_PROFILER_ENABLED"] = True
+DebugToolbarExtension(app)
 
 UPDATE_EVERY_SEC = int(os.environ.get('UPDATE_EVERY_SEC', '60'))
 
@@ -259,15 +265,6 @@ def pull_updates_cron():
 
 
 if __name__ == "__main__":
-    # We have to set debug=True here, since it has to be True at the point
-    # that we invoke the DebugToolbarExtension
-
-    app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = True
-    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-    # Use the DebugToolbar
-    # DebugToolbarExtension(app)
-
     t = Thread(name="updates-watcher", target=pull_updates_cron, daemon=True)
     t.start()
 
