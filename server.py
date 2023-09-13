@@ -33,8 +33,6 @@ DebugToolbarExtension(app)
 
 UPDATE_EVERY_SEC = int(os.environ.get('UPDATE_EVERY_SEC', '60'))
 
-connect_to_db(app, echo=True)
-
 
 ####################### HOMEPAGE/LOGIN/LOGOUT/REGISTER ##############################
 @app.route("/")
@@ -267,5 +265,7 @@ def pull_updates_cron():
 if __name__ == "__main__":
     t = Thread(name="updates-watcher", target=pull_updates_cron, daemon=True)
     t.start()
+
+    connect_to_db(app, echo=True)
 
     app.run(host='0.0.0.0')
