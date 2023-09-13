@@ -2,7 +2,7 @@
 from flask import Flask, jsonify, render_template, request, session, flash, redirect
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import connect_to_db, Member, Chat, User
+from model import connect_to_db, Member, Chat
 from argon2 import PasswordHasher
 from jinja2 import StrictUndefined
 from typing import List, Dict
