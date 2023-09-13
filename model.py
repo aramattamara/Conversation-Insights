@@ -1,11 +1,10 @@
 """Model for telegram analytics app."""
-from typing import Dict
-
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
 
 db = SQLAlchemy()
+
 
 class User(db.Model):
     """A user."""
@@ -72,7 +71,7 @@ class Member(db.Model, SerializerMixin):
     def __repr__(self):
         return f"<Member member_id={self.member_id}>"
 
-    def to_dict_with_count(self, chat_id: int) -> Dict:
+    def to_dict_with_count(self, chat_id: int) -> dict:
         d = self.to_dict()
         total = Message.query.filter_by(member_id=self.member_id, chat_id=chat_id).count()
         d['total'] = total
