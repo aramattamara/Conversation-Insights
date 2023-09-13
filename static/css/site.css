@@ -7,7 +7,7 @@
     --color-primary: #6F32BE;
     --color-primary-light: #5764e1;
     --color-text: #dee2e6;
-    --color-text-dark-gray: #59687c;;
+    --color-text-dark-gray: #59687c;
     --color-background: rgb(221, 214, 243);
     --color-background-gradient: radial-gradient(circle, #F6D5F7 40%, #FBE9D7 100%);
     --color-background-transparent: transparent;
@@ -90,9 +90,8 @@ form {
     border-color: var(--color-primary);
     border-radius: 10px;
     width: 90%;
-    color: white;
-    font-size: 14px;
-    letter-spacing: 3px;
+    color: var(--color-primary);
+    font-size: 16px;
     padding: 10px 0;
     margin-bottom: 10px;
     outline: none;
@@ -101,7 +100,7 @@ form {
 #log-reg-btn:hover {
     background-color: white;
     border-color: var(--color-primary);
-    color: #7a553f;
+    color: #cf3881;
     outline: none;
 }
 
@@ -116,17 +115,17 @@ form {
 }
 
 #login-span:hover {
-    font-weight: 300;
+    font-weight: 400;
     color: var(--color-primary);
 }
 
 #registration-span {
     font-weight: 400;
-    color: #7a553f;
+    color: #cf3881;
 }
 
 #registration-span:hover {
-    font-weight: 300;
+    font-weight: 400;
     color: var(--color-primary);
 }
 
