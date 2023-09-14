@@ -53,7 +53,7 @@ Search: This feature helps navigate throught all members of chat and easy find t
 ## <a name="setup"></a>Set up
 Clone or fork this repo:
 ```sh
-git clone git@github.com:aramattamara/Conversation-Insights.git
+git clone https://github.com/aramattamara/Conversation-Insights.git
 ```
 Create and activate a virtual environment inside your directory:
 ```sh
